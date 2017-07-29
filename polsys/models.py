@@ -23,7 +23,7 @@ class Alvo(models.Model):
 
 
 class AlvoEvento(models.Model):
-    id_alvo = models.ForeignKey(Alvo, models.DO_NOTHING, db_column='id_alvo', primary_key=True)
+    id_alvo = models.ForeignKey(Alvo, models.DO_NOTHING, db_column='id_alvo')
     id_evento = models.ForeignKey('Evento', models.DO_NOTHING, db_column='id_evento')
     is_consumado = models.IntegerField()
     id_modus_operandi = models.ForeignKey('ModusOperandi', models.DO_NOTHING, db_column='id_modus_operandi')
@@ -50,7 +50,7 @@ class Armamento(models.Model):
 
 
 class ArmamentoEvento(models.Model):
-    id_armamento = models.ForeignKey(Armamento, models.DO_NOTHING, db_column='id_armamento', primary_key=True)
+    id_armamento = models.ForeignKey(Armamento, models.DO_NOTHING, db_column='id_armamento')
     id_evento = models.ForeignKey('Evento', models.DO_NOTHING, db_column='id_evento')
 
     class Meta:
@@ -86,7 +86,7 @@ class CidadeMg(models.Model):
 
 
 class Comparsas(models.Model):
-    id_suspeito_primario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_primario', related_name="suspeitoprimario",  primary_key=True)
+    id_suspeito_primario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_primario', related_name="suspeitoprimario")
     id_suspeito_secundario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_secundario' , related_name="suspeitosecundario")
 
     class Meta:
@@ -146,7 +146,7 @@ class Material(models.Model):
 
 
 class MaterialEvento(models.Model):
-    id_material = models.ForeignKey(Material, models.DO_NOTHING, db_column='id_material', primary_key=True)
+    id_material = models.ForeignKey(Material, models.DO_NOTHING, db_column='id_material')
     id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
 
     class Meta:
@@ -174,7 +174,7 @@ class ObjetoAlvo(models.Model):
 
 
 class SupeitoCrimes(models.Model):
-    id_tipo_penal = models.ForeignKey('TipoPenalCp', models.DO_NOTHING, db_column='id_tipo_penal', primary_key=True)
+    id_tipo_penal = models.ForeignKey('TipoPenalCp', models.DO_NOTHING, db_column='id_tipo_penal')
     id_suspeito = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito')
 
     class Meta:
@@ -213,7 +213,7 @@ class Suspeito(models.Model):
 
 
 class SuspeitoAlvo(models.Model):
-    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento', primary_key=True)
+    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
     id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
     data_inclusao = models.DateField(blank=True, null=True)
 
@@ -224,7 +224,7 @@ class SuspeitoAlvo(models.Model):
 
 
 class SuspeitoCidade(models.Model):
-    id_cidade = models.ForeignKey(CidadeMg, models.DO_NOTHING, db_column='id_cidade', primary_key=True)
+    id_cidade = models.ForeignKey(CidadeMg, models.DO_NOTHING, db_column='id_cidade')
     id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
 
     class Meta:
@@ -234,7 +234,7 @@ class SuspeitoCidade(models.Model):
 
 
 class SuspeitoEventos(models.Model):
-    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento', primary_key=True)
+    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
     id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
 
     class Meta:
@@ -321,7 +321,7 @@ class Veiculo(models.Model):
 
 
 class VeiculoEvento(models.Model):
-    id_veiculo = models.ForeignKey(Veiculo, models.DO_NOTHING, db_column='id_veiculo', primary_key=True)
+    id_veiculo = models.ForeignKey(Veiculo, models.DO_NOTHING, db_column='id_veiculo')
     id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
 
     class Meta:

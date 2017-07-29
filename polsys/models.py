@@ -103,14 +103,14 @@ class Evento(models.Model):
     data = models.DateField(blank=True, null=True)
     horario = models.TimeField(blank=True, null=True)
     reds = models.CharField(max_length=19, blank=True, null=True)
-    is_disparo_via_publica = models.IntegerField()
-    is_disparo_bpm = models.BooleanField()
-    is_disparo_dpc = models.BooleanField()
-    is_troca_de_tiros = models.BooleanField()
-    is_encapuzados = models.BooleanField()
-    is_colete_balistico = models.BooleanField()
-    is_miguelitos_fuga = models.BooleanField()
-    TipoPenalCp = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
+    is_disparo_via_publica = models.IntegerField('Disparos em via públicas', help_text='Quantidade de disparos em via pública')
+    is_disparo_bpm = models.BooleanField('Disparo BPM')
+    is_disparo_dpc = models.BooleanField('Disparo DPC')
+    is_troca_de_tiros = models.BooleanField('Troca de Tiros')
+    is_encapuzados = models.BooleanField('Encapuzados')
+    is_colete_balistico = models.BooleanField('Colete Balístico')
+    is_miguelitos_fuga = models.BooleanField('Miguelitos Fuga')
+    TipoPenalCp = models.ForeignKey('TipoPenalCp',verbose_name="Pena",on_delete=models.CASCADE )
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
  
     class Meta:
@@ -264,7 +264,7 @@ class TipoEnvolvimentoSuspeito(models.Model):
 
 
 class TipoPenalCp(models.Model):
-    nome = models.CharField(max_length=50, blank=True, null=True)
+    nome = models.CharField('Pena',max_length=50, blank=True, null=True)
     art = models.IntegerField(blank=True, null=True)
     paragrafo = models.CharField(max_length=10, blank=True, null=True)
     inciso = models.CharField(max_length=10, blank=True, null=True)

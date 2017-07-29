@@ -26,7 +26,7 @@ class Alvo(models.Model):
 class AlvoEvento(models.Model):
     Alvo = models.ForeignKey(Alvo, on_delete=models.CASCADE )
     Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
-    is_consumado = models.IntegerField()
+    Consumado = models.BooleanField()
     ModusOperandi = models.ForeignKey('ModusOperandi', on_delete=models.CASCADE )
     ObjetoAlvo = models.ForeignKey('ObjetoAlvo', on_delete=models.CASCADE, blank=True, null=True)
 
@@ -38,7 +38,7 @@ class AlvoEvento(models.Model):
 
 class Armamento(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
-    is_artesanal = models.IntegerField(blank=True, null=True)
+    is_artesanal = models.BooleanField()
     calibre = models.CharField(max_length=10, blank=True, null=True)
     numeracao = models.CharField(max_length=10, blank=True, null=True)
     FabricanteArmamento = models.ForeignKey('FabricanteArmamento', on_delete=models.CASCADE )
@@ -104,16 +104,15 @@ class Evento(models.Model):
     horario = models.TimeField(blank=True, null=True)
     reds = models.CharField(max_length=19, blank=True, null=True)
     is_disparo_via_publica = models.IntegerField()
-    is_disparo_bpm = models.IntegerField(blank=True, null=True)
-    is_disparo_dpc = models.IntegerField(blank=True, null=True)
-    is_troca_de_tiros = models.IntegerField(blank=True, null=True)
-    is_encapuzados = models.IntegerField(blank=True, null=True)
-    is_colete_balistico = models.CharField(max_length=10, blank=True, null=True)
-    is_miguelitos_fuga = models.CharField(max_length=10, blank=True, null=True)
+    is_disparo_bpm = models.BooleanField()
+    is_disparo_dpc = models.BooleanField()
+    is_troca_de_tiros = models.BooleanField()
+    is_encapuzados = models.BooleanField()
+    is_colete_balistico = models.BooleanField()
+    is_miguelitos_fuga = models.BooleanField()
     TipoPenalCp = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
-    Cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE )
-
+ 
     class Meta:
         managed = True
         db_table = 'EVENTO'
@@ -138,7 +137,7 @@ class Faccao(models.Model):
 
 class Material(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
-    is_venda_controlada = models.CharField(max_length=10, blank=True, null=True)
+    is_venda_controlada = models.BooleanField()
 
     class Meta:
         managed = True
@@ -192,16 +191,16 @@ class Suspeito(models.Model):
     nome_da_mae = models.CharField(max_length=100, blank=True, null=True)
     infopen = models.IntegerField(blank=True, null=True)
     regiao = models.CharField(max_length=100, blank=True, null=True)
-    is_foto = models.IntegerField(blank=True, null=True)
+    is_foto = models.BooleanFiel()
     fonte = models.CharField(max_length=50, blank=True, null=True)
-    id_modus_operandi = models.ForeignKey(ModusOperandi, on_delete=models.CASCADE )
+    ModusOperandi = models.ForeignKey(ModusOperandi, on_delete=models.CASCADE )
     TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', on_delete=models.CASCADE )
     TipoSituacaoPrisional = models.ForeignKey('TipoSituacaoPrisional', on_delete=models.CASCADE )
     data_ultima_prisao = models.DateField(blank=True, null=True)
     UnidadePrisional = models.ForeignKey('UnidadePrisional', on_delete=models.CASCADE )
-    is_monitoramento_sige = models.IntegerField(blank=True, null=True)
-    is_alta_periculosidade = models.IntegerField(blank=True, null=True)
-    is_confronto_policia = models.IntegerField(blank=True, null=True)
+    is_monitoramento_sige = models.BooleanField()
+    is_alta_periculosidade = models.BooleanField()
+    is_confronto_policia = models.BooleanField()
     id_faccao = models.ForeignKey(Faccao, on_delete=models.CASCADE )
 
     class Meta:
@@ -297,12 +296,12 @@ class Veiculo(models.Model):
     placa = models.CharField(max_length=10, blank=True, null=True)
     nome = models.CharField(max_length=10, blank=True, null=True)
     fabricante = models.CharField(max_length=10, blank=True, null=True)
-    is_caminhonete = models.CharField(max_length=10, blank=True, null=True)
-    is_importado = models.CharField(max_length=10, blank=True, null=True)
-    is_moto = models.CharField(max_length=10, blank=True, null=True)
-    is_clonado = models.CharField(max_length=10, blank=True, null=True)
-    is_roubado_furtado = models.CharField(max_length=10, blank=True, null=True)
-    is_alugado = models.CharField(max_length=10, blank=True, null=True)
+    is_caminhonete = models.BooleanField()
+    is_importado = models.BooleanField()
+    is_moto = models.BooleanField()
+    is_clonado = models.BooleanField()
+    is_roubado_furtado = BooleanField()
+    is_alugado = models.BooleanField()
     cpf_proprietario = models.IntegerField(blank=True, null=True)
 
     class Meta:

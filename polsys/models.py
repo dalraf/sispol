@@ -14,7 +14,7 @@ from django.db import models
 
 class Alvo(models.Model):
     nome = models.CharField(max_length=150, blank=True, null=True)
-    id_tipo_alvo = models.ForeignKey('TipoAlvo', on_delete=models.CASCADE )
+    TipoAlvo = models.ForeignKey('TipoAlvo', on_delete=models.CASCADE )
 
     class Meta:
         managed = True
@@ -22,16 +22,16 @@ class Alvo(models.Model):
 
 
 class AlvoEvento(models.Model):
-    id_alvo = models.ForeignKey(Alvo, on_delete=models.CASCADE )
-    id_evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
+    Alvo = models.ForeignKey(Alvo, on_delete=models.CASCADE )
+    Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
     is_consumado = models.IntegerField()
-    id_modus_operandi = models.ForeignKey('ModusOperandi', on_delete=models.CASCADE )
-    id_objeto_alvo = models.ForeignKey('ObjetoAlvo', on_delete=models.CASCADE, blank=True, null=True)
+    ModusOperandi = models.ForeignKey('ModusOperandi', on_delete=models.CASCADE )
+    ObjetoAlvo = models.ForeignKey('ObjetoAlvo', on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'ALVO_EVENTO'
-        unique_together = (('id_alvo', 'id_evento'),)
+        unique_together = (('Alvo', 'Evento'),)
 
 
 class Armamento(models.Model):
@@ -39,8 +39,8 @@ class Armamento(models.Model):
     is_artesanal = models.IntegerField(blank=True, null=True)
     calibre = models.CharField(max_length=10, blank=True, null=True)
     numeracao = models.CharField(max_length=10, blank=True, null=True)
-    id_fabricante_armamento = models.ForeignKey('FabricanteArmamento', on_delete=models.CASCADE )
-    id_tipo_armamento = models.ForeignKey('TipoArmamento', on_delete=models.CASCADE )
+    FabricanteArmamento = models.ForeignKey('FabricanteArmamento', on_delete=models.CASCADE )
+    TipoArmamento = models.ForeignKey('TipoArmamento', on_delete=models.CASCADE )
 
     class Meta:
         managed = True
@@ -48,18 +48,18 @@ class Armamento(models.Model):
 
 
 class ArmamentoEvento(models.Model):
-    id_armamento = models.ForeignKey(Armamento, on_delete=models.CASCADE )
-    id_evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
+    Armamento = models.ForeignKey(Armamento, on_delete=models.CASCADE )
+    Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
 
     class Meta:
         managed = True
         db_table = 'ARMAMENTO_EVENTO'
-        unique_together = (('id_armamento', 'id_evento'),)
+        unique_together = (('Armamento', 'Evento'),)
 
 
 class Bairro(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
-    id_cidade = models.ForeignKey('CidadeMg', on_delete=models.CASCADE )
+    CidadeMg = models.ForeignKey('CidadeMg', on_delete=models.CASCADE )
 
     class Meta:
         managed = True
@@ -82,13 +82,13 @@ class CidadeMg(models.Model):
 
 
 class Comparsas(models.Model):
-    id_suspeito_primario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, related_name="suspeitoprimario")
-    id_suspeito_secundario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, related_name="suspeitosecundario")
+    SuspeitoPrimario = models.ForeignKey('Suspeito', on_delete=models.CASCADE , related_name="SuspeitoPrimario" )
+    SuspeitoSecundario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, related_name="SuspeitoSecundario")
 
     class Meta:
         managed = True
         db_table = 'COMPARSAS'
-        unique_together = (('id_suspeito_primario', 'id_suspeito_secundario'),)
+        unique_together = (('SuspeitoPrimario', 'SuspeiroSecundario'),)
 
 
 class Evento(models.Model):
@@ -102,7 +102,7 @@ class Evento(models.Model):
     is_encapuzados = models.IntegerField(blank=True, null=True)
     is_colete_balistico = models.CharField(max_length=10, blank=True, null=True)
     is_miguelitos_fuga = models.CharField(max_length=10, blank=True, null=True)
-    id_tipo_penal = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
+    TipoPenalCp = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
     id_bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
     id_cidade = models.ForeignKey(CidadeMg, on_delete=models.CASCADE )
 
@@ -138,13 +138,13 @@ class Material(models.Model):
 
 
 class MaterialEvento(models.Model):
-    id_material = models.ForeignKey(Material, on_delete=models.CASCADE )
-    id_evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
+    Material = models.ForeignKey(Material, on_delete=models.CASCADE )
+    Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
 
     class Meta:
         managed = True
         db_table = 'MATERIAL_EVENTO'
-        unique_together = (('id_material', 'id_evento'),)
+        unique_together = (('Material', 'Evento'),)
 
 
 class ModusOperandi(models.Model):
@@ -164,13 +164,13 @@ class ObjetoAlvo(models.Model):
 
 
 class SupeitoCrimes(models.Model):
-    id_tipo_penal = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
-    id_suspeito = models.ForeignKey('Suspeito', on_delete=models.CASCADE )
+    TipoPenalCp = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
+    Suspeito = models.ForeignKey('Suspeito', on_delete=models.CASCADE )
 
     class Meta:
         managed = True
         db_table = 'SUPEITO_CRIMES'
-        unique_together = (('id_tipo_penal', 'id_suspeito'),)
+        unique_together = (('TipoPenalCp', 'Suspeito'),)
 
 
 class Suspeito(models.Model):
@@ -187,10 +187,10 @@ class Suspeito(models.Model):
     is_foto = models.IntegerField(blank=True, null=True)
     fonte = models.CharField(max_length=50, blank=True, null=True)
     id_modus_operandi = models.ForeignKey(ModusOperandi, on_delete=models.CASCADE )
-    id_tipo_envolvimento_suspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', on_delete=models.CASCADE )
-    id_tipo_situacao_prisional = models.ForeignKey('TipoSituacaoPrisional', on_delete=models.CASCADE )
+    TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', on_delete=models.CASCADE )
+    TipoSituacaoPrisional = models.ForeignKey('TipoSituacaoPrisional', on_delete=models.CASCADE )
     data_ultima_prisao = models.DateField(blank=True, null=True)
-    id_unidade_prisional = models.ForeignKey('UnidadePrisional', on_delete=models.CASCADE )
+    UnidadePrisional = models.ForeignKey('UnidadePrisional', on_delete=models.CASCADE )
     is_monitoramento_sige = models.IntegerField(blank=True, null=True)
     is_alta_periculosidade = models.IntegerField(blank=True, null=True)
     is_confronto_policia = models.IntegerField(blank=True, null=True)
@@ -202,34 +202,34 @@ class Suspeito(models.Model):
 
 
 class SuspeitoAlvo(models.Model):
-    id_evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
-    id_suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
+    Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
+    Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
     data_inclusao = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'SUSPEITO_ALVO'
-        unique_together = (('id_evento', 'id_suspeito'),)
+        unique_together = (('Evento', 'Suspeito'),)
 
 
 class SuspeitoCidade(models.Model):
-    id_cidade = models.ForeignKey(CidadeMg, on_delete=models.CASCADE )
-    id_suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
+    CidadeMg = models.ForeignKey(CidadeMg, on_delete=models.CASCADE )
+    Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
 
     class Meta:
         managed = True
         db_table = 'SUSPEITO_CIDADE'
-        unique_together = (('id_cidade', 'id_suspeito'),)
+        unique_together = (('CidadeMg', 'Suspeito'),)
 
 
 class SuspeitoEventos(models.Model):
-    id_evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
-    id_suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
+    Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
+    Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
 
     class Meta:
         managed = True
         db_table = 'SUSPEITO_EVENTOS'
-        unique_together = (('id_evento', 'id_suspeito'),)
+        unique_together = (('Evento', 'Suspeito'),)
 
 
 class TipoAlvo(models.Model):
@@ -303,10 +303,10 @@ class Veiculo(models.Model):
 
 
 class VeiculoEvento(models.Model):
-    id_veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE )
-    id_evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
+    Veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE )
+    Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
 
     class Meta:
         managed = True
         db_table = 'VEICULO_EVENTO'
-        unique_together = (('id_veiculo', 'id_evento'),)
+        unique_together = (('Veiculo', 'Evento'),)

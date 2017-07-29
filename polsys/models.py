@@ -88,7 +88,7 @@ class Comparsas(models.Model):
     class Meta:
         managed = True
         db_table = 'COMPARSAS'
-        unique_together = (('SuspeitoPrimario', 'SuspeiroSecundario'),)
+        unique_together = (('SuspeitoPrimario', 'SuspeitoSecundario'),)
 
 
 class Evento(models.Model):

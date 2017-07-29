@@ -7,6 +7,9 @@ from django.contrib import admin
 
 from .models import *
 
+admin.site.site_header = 'Sistema Policial'
+admin.site.site_title = 'Sistema Policial'
+admin.site.index_title = 'Sistema Policial'
 class EventoDetalhe(admin.ModelAdmin):
 #    fields = ['data', 'horario', 'reds']
     model = Evento

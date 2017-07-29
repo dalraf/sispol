@@ -86,13 +86,13 @@ class CidadeMg(models.Model):
 
 
 class Comparsas(models.Model):
-    id_suspeito = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito', primary_key=True)
-    id_suspeito_0 = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_0')
+    id_suspeito_primario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_primario', related_name="suspeitoprimario",  primary_key=True)
+    id_suspeito_secundario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_secundario' , related_name="suspeitosecundario")
 
     class Meta:
         managed = False
         db_table = 'COMPARSAS'
-        unique_together = (('id_suspeito', 'id_suspeito_0'),)
+        unique_together = (('id_suspeito_primario', 'id_suspeito_secundario'),)
 
 
 class Evento(models.Model):

@@ -6,3 +6,5 @@ from django.apps import AppConfig
 
 class PolsysConfig(AppConfig):
     name = 'polsys'
+    verbose_name = 'Sistema Policial'
+ 

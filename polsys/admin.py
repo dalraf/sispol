@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from daterange_filter.filter import DateRangeFilter
+from django.apps import AppConfig
 
 # Register your models here.
 
@@ -11,6 +12,7 @@ from .models import *
 admin.site.site_header = 'Sistema Policial'
 admin.site.site_title = 'Sistema Policial'
 admin.site.index_title = 'Sistema Policial'
+
 class EventoDetalhe(admin.ModelAdmin):
 #    fields = ['data', 'horario', 'reds']
     model = Evento

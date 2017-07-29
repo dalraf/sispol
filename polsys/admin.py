@@ -9,5 +9,7 @@ from .models import *
 
 admin.site.register(Evento)
 admin.site.register(Bairro)
+admin.site.register(TipoPenalCp)
 admin.site.register(Cidade)
+
 

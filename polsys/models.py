@@ -271,6 +271,9 @@ class TipoPenalCp(models.Model):
     alinea = models.CharField(max_length=10, blank=True, null=True)
     item = models.CharField(max_length=10, blank=True, null=True)
 
+    def __str__(self):
+        return self.nome
+
     class Meta:
         managed = True
         db_table = 'TIPO_PENAL_CP'

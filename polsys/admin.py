@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from daterange_filter.filter import DateRangeFilter
 
 # Register your models here.
 
@@ -14,7 +15,7 @@ class EventoDetalhe(admin.ModelAdmin):
 #    fields = ['data', 'horario', 'reds']
     model = Evento
     list_display = ('reds', 'data', 'horario' )
-    list_filter = [('data')]
+    list_filter = (('data', DateRangeFilter ),)
     search_fields = ('reds',)
     fieldsets = [
         (None,               {'fields': ['data', 'horario', 'reds']}),

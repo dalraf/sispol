@@ -277,6 +277,7 @@ class TipoPenalCp(models.Model):
     class Meta:
         managed = True
         db_table = 'TIPO_PENAL_CP'
+        verbose_name = "Pena"
 
 
 class TipoSituacaoPrisional(models.Model):

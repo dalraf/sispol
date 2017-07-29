@@ -191,7 +191,7 @@ class Suspeito(models.Model):
     nome_da_mae = models.CharField(max_length=100, blank=True, null=True)
     infopen = models.IntegerField(blank=True, null=True)
     regiao = models.CharField(max_length=100, blank=True, null=True)
-    is_foto = models.BooleanFiel()
+    is_foto = models.BooleanField()
     fonte = models.CharField(max_length=50, blank=True, null=True)
     ModusOperandi = models.ForeignKey(ModusOperandi, on_delete=models.CASCADE )
     TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', on_delete=models.CASCADE )
@@ -300,7 +300,7 @@ class Veiculo(models.Model):
     is_importado = models.BooleanField()
     is_moto = models.BooleanField()
     is_clonado = models.BooleanField()
-    is_roubado_furtado = BooleanField()
+    is_roubado_furtado = models.BooleanField()
     is_alugado = models.BooleanField()
     cpf_proprietario = models.IntegerField(blank=True, null=True)
 

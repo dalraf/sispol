@@ -13,9 +13,8 @@ from django.db import models
 # Feel free to rename the models, but don't rename db_table values or field names.
 
 class Alvo(models.Model):
-    id_alvo = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=150, blank=True, null=True)
-    id_tipo_alvo = models.ForeignKey('TipoAlvo', models.DO_NOTHING, db_column='id_tipo_alvo')
+    id_tipo_alvo = models.ForeignKey('TipoAlvo', models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -23,11 +22,11 @@ class Alvo(models.Model):
 
 
 class AlvoEvento(models.Model):
-    id_alvo = models.ForeignKey(Alvo, models.DO_NOTHING, db_column='id_alvo')
-    id_evento = models.ForeignKey('Evento', models.DO_NOTHING, db_column='id_evento')
+    id_alvo = models.ForeignKey(Alvo, models.DO_NOTHING )
+    id_evento = models.ForeignKey('Evento', models.DO_NOTHING )
     is_consumado = models.IntegerField()
-    id_modus_operandi = models.ForeignKey('ModusOperandi', models.DO_NOTHING, db_column='id_modus_operandi')
-    id_objeto_alvo = models.ForeignKey('ObjetoAlvo', models.DO_NOTHING, db_column='id_objeto_alvo', blank=True, null=True)
+    id_modus_operandi = models.ForeignKey('ModusOperandi', models.DO_NOTHING )
+    id_objeto_alvo = models.ForeignKey('ObjetoAlvo', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = True
@@ -36,13 +35,12 @@ class AlvoEvento(models.Model):
 
 
 class Armamento(models.Model):
-    id_armamento = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
     is_artesanal = models.IntegerField(blank=True, null=True)
     calibre = models.CharField(max_length=10, blank=True, null=True)
     numeracao = models.CharField(max_length=10, blank=True, null=True)
-    id_fabricante_armamento = models.ForeignKey('FabricanteArmamento', models.DO_NOTHING, db_column='id_fabricante_armamento')
-    id_tipo_armamento = models.ForeignKey('TipoArmamento', models.DO_NOTHING, db_column='id_tipo_armamento')
+    id_fabricante_armamento = models.ForeignKey('FabricanteArmamento', models.DO_NOTHING )
+    id_tipo_armamento = models.ForeignKey('TipoArmamento', models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -50,8 +48,8 @@ class Armamento(models.Model):
 
 
 class ArmamentoEvento(models.Model):
-    id_armamento = models.ForeignKey(Armamento, models.DO_NOTHING, db_column='id_armamento')
-    id_evento = models.ForeignKey('Evento', models.DO_NOTHING, db_column='id_evento')
+    id_armamento = models.ForeignKey(Armamento, models.DO_NOTHING )
+    id_evento = models.ForeignKey('Evento', models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -60,9 +58,8 @@ class ArmamentoEvento(models.Model):
 
 
 class Bairro(models.Model):
-    id_bairro = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=50, blank=True, null=True)
-    id_cidade = models.ForeignKey('CidadeMg', models.DO_NOTHING, db_column='id_cidade')
+    id_cidade = models.ForeignKey('CidadeMg', models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -70,7 +67,6 @@ class Bairro(models.Model):
 
 
 class CidadeMg(models.Model):
-    id_cidade = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
     num_habitantes = models.IntegerField(blank=True, null=True)
     latidude = models.CharField(max_length=50, blank=True, null=True)
@@ -86,8 +82,8 @@ class CidadeMg(models.Model):
 
 
 class Comparsas(models.Model):
-    id_suspeito_primario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_primario', related_name="suspeitoprimario")
-    id_suspeito_secundario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_secundario' , related_name="suspeitosecundario")
+    id_suspeito_primario = models.ForeignKey('Suspeito', models.DO_NOTHING, related_name="suspeitoprimario")
+    id_suspeito_secundario = models.ForeignKey('Suspeito', models.DO_NOTHING, related_name="suspeitosecundario")
 
     class Meta:
         managed = True
@@ -96,7 +92,6 @@ class Comparsas(models.Model):
 
 
 class Evento(models.Model):
-    id_evento = models.IntegerField(primary_key=True)
     data = models.DateField(blank=True, null=True)
     horario = models.TimeField(blank=True, null=True)
     reds = models.CharField(max_length=19, blank=True, null=True)
@@ -107,9 +102,9 @@ class Evento(models.Model):
     is_encapuzados = models.IntegerField(blank=True, null=True)
     is_colete_balistico = models.CharField(max_length=10, blank=True, null=True)
     is_miguelitos_fuga = models.CharField(max_length=10, blank=True, null=True)
-    id_tipo_penal = models.ForeignKey('TipoPenalCp', models.DO_NOTHING, db_column='id_tipo_penal')
-    id_bairro = models.ForeignKey(Bairro, models.DO_NOTHING, db_column='id_bairro')
-    id_cidade = models.ForeignKey(CidadeMg, models.DO_NOTHING, db_column='id_cidade')
+    id_tipo_penal = models.ForeignKey('TipoPenalCp', models.DO_NOTHING )
+    id_bairro = models.ForeignKey(Bairro, models.DO_NOTHING )
+    id_cidade = models.ForeignKey(CidadeMg, models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -117,7 +112,6 @@ class Evento(models.Model):
 
 
 class FabricanteArmamento(models.Model):
-    id_fabricante_armamento = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
     pais = models.CharField(max_length=100, blank=True, null=True)
 
@@ -127,7 +121,6 @@ class FabricanteArmamento(models.Model):
 
 
 class Faccao(models.Model):
-    id_faccao = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
@@ -136,7 +129,6 @@ class Faccao(models.Model):
 
 
 class Material(models.Model):
-    id_material = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=10, blank=True, null=True)
     is_venda_controlada = models.CharField(max_length=10, blank=True, null=True)
 
@@ -146,8 +138,8 @@ class Material(models.Model):
 
 
 class MaterialEvento(models.Model):
-    id_material = models.ForeignKey(Material, models.DO_NOTHING, db_column='id_material')
-    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
+    id_material = models.ForeignKey(Material, models.DO_NOTHING )
+    id_evento = models.ForeignKey(Evento, models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -156,7 +148,6 @@ class MaterialEvento(models.Model):
 
 
 class ModusOperandi(models.Model):
-    id_modus_operandi = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -165,7 +156,6 @@ class ModusOperandi(models.Model):
 
 
 class ObjetoAlvo(models.Model):
-    id_objeto_alvo = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
@@ -174,8 +164,8 @@ class ObjetoAlvo(models.Model):
 
 
 class SupeitoCrimes(models.Model):
-    id_tipo_penal = models.ForeignKey('TipoPenalCp', models.DO_NOTHING, db_column='id_tipo_penal')
-    id_suspeito = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito')
+    id_tipo_penal = models.ForeignKey('TipoPenalCp', models.DO_NOTHING )
+    id_suspeito = models.ForeignKey('Suspeito', models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -184,7 +174,6 @@ class SupeitoCrimes(models.Model):
 
 
 class Suspeito(models.Model):
-    id_suspeito = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
     alcunha = models.CharField(max_length=200, blank=True, null=True)
     rg = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
@@ -197,15 +186,15 @@ class Suspeito(models.Model):
     regiao = models.CharField(max_length=100, blank=True, null=True)
     is_foto = models.IntegerField(blank=True, null=True)
     fonte = models.CharField(max_length=50, blank=True, null=True)
-    id_modus_operandi = models.ForeignKey(ModusOperandi, models.DO_NOTHING, db_column='id_modus_operandi')
-    id_tipo_envolvimento_suspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', models.DO_NOTHING, db_column='id_tipo_envolvimento_suspeito')
-    id_tipo_situacao_prisional = models.ForeignKey('TipoSituacaoPrisional', models.DO_NOTHING, db_column='id_tipo_situacao_prisional')
+    id_modus_operandi = models.ForeignKey(ModusOperandi, models.DO_NOTHING )
+    id_tipo_envolvimento_suspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', models.DO_NOTHING )
+    id_tipo_situacao_prisional = models.ForeignKey('TipoSituacaoPrisional', models.DO_NOTHING )
     data_ultima_prisao = models.DateField(blank=True, null=True)
-    id_unidade_prisional = models.ForeignKey('UnidadePrisional', models.DO_NOTHING, db_column='id_unidade_prisional')
+    id_unidade_prisional = models.ForeignKey('UnidadePrisional', models.DO_NOTHING )
     is_monitoramento_sige = models.IntegerField(blank=True, null=True)
     is_alta_periculosidade = models.IntegerField(blank=True, null=True)
     is_confronto_policia = models.IntegerField(blank=True, null=True)
-    id_faccao = models.ForeignKey(Faccao, models.DO_NOTHING, db_column='id_faccao')
+    id_faccao = models.ForeignKey(Faccao, models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -213,8 +202,8 @@ class Suspeito(models.Model):
 
 
 class SuspeitoAlvo(models.Model):
-    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
-    id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
+    id_evento = models.ForeignKey(Evento, models.DO_NOTHING )
+    id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING )
     data_inclusao = models.DateField(blank=True, null=True)
 
     class Meta:
@@ -224,8 +213,8 @@ class SuspeitoAlvo(models.Model):
 
 
 class SuspeitoCidade(models.Model):
-    id_cidade = models.ForeignKey(CidadeMg, models.DO_NOTHING, db_column='id_cidade')
-    id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
+    id_cidade = models.ForeignKey(CidadeMg, models.DO_NOTHING )
+    id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -234,8 +223,8 @@ class SuspeitoCidade(models.Model):
 
 
 class SuspeitoEventos(models.Model):
-    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
-    id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
+    id_evento = models.ForeignKey(Evento, models.DO_NOTHING )
+    id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING )
 
     class Meta:
         managed = True
@@ -244,7 +233,6 @@ class SuspeitoEventos(models.Model):
 
 
 class TipoAlvo(models.Model):
-    id_tipo_alvo = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
@@ -253,7 +241,6 @@ class TipoAlvo(models.Model):
 
 
 class TipoArmamento(models.Model):
-    id_tipo_armamento = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -262,7 +249,6 @@ class TipoArmamento(models.Model):
 
 
 class TipoEnvolvimentoSuspeito(models.Model):
-    id_tipo_envolvimento_suspeito = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
@@ -271,7 +257,6 @@ class TipoEnvolvimentoSuspeito(models.Model):
 
 
 class TipoPenalCp(models.Model):
-    id_tipo_penal = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=50, blank=True, null=True)
     art = models.IntegerField(blank=True, null=True)
     paragrafo = models.CharField(max_length=10, blank=True, null=True)
@@ -285,7 +270,6 @@ class TipoPenalCp(models.Model):
 
 
 class TipoSituacaoPrisional(models.Model):
-    id_tipo_situacao_prisional = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
@@ -294,7 +278,6 @@ class TipoSituacaoPrisional(models.Model):
 
 
 class UnidadePrisional(models.Model):
-    id_unidade_prisional = models.CharField(primary_key=True, max_length=10)
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
@@ -303,7 +286,6 @@ class UnidadePrisional(models.Model):
 
 
 class Veiculo(models.Model):
-    id_veiculo = models.CharField(primary_key=True, max_length=10)
     placa = models.CharField(max_length=10, blank=True, null=True)
     nome = models.CharField(max_length=10, blank=True, null=True)
     fabricante = models.CharField(max_length=10, blank=True, null=True)
@@ -321,8 +303,8 @@ class Veiculo(models.Model):
 
 
 class VeiculoEvento(models.Model):
-    id_veiculo = models.ForeignKey(Veiculo, models.DO_NOTHING, db_column='id_veiculo')
-    id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
+    id_veiculo = models.ForeignKey(Veiculo, models.DO_NOTHING )
+    id_evento = models.ForeignKey(Evento, models.DO_NOTHING )
 
     class Meta:
         managed = True

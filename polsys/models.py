@@ -15,6 +15,8 @@ from django.db import models
 class Alvo(models.Model):
     nome = models.CharField(max_length=150, blank=True, null=True)
     TipoAlvo = models.ForeignKey('TipoAlvo', on_delete=models.CASCADE )
+    def __str__(self):
+        return self.nome
 
     class Meta:
         managed = True
@@ -59,14 +61,17 @@ class ArmamentoEvento(models.Model):
 
 class Bairro(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
-    CidadeMg = models.ForeignKey('CidadeMg', on_delete=models.CASCADE )
+    Cidade = models.ForeignKey('Cidade', on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         managed = True
         db_table = 'BAIRRO'
 
 
-class CidadeMg(models.Model):
+class Cidade(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
     num_habitantes = models.IntegerField(blank=True, null=True)
     latidude = models.CharField(max_length=50, blank=True, null=True)
@@ -75,6 +80,9 @@ class CidadeMg(models.Model):
     regional_pcmg = models.CharField(max_length=10, blank=True, null=True)
     departamento_pcmg = models.CharField(max_length=10, blank=True, null=True)
     uf_fronteira = models.CharField(max_length=2, blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         managed = True
@@ -103,8 +111,8 @@ class Evento(models.Model):
     is_colete_balistico = models.CharField(max_length=10, blank=True, null=True)
     is_miguelitos_fuga = models.CharField(max_length=10, blank=True, null=True)
     TipoPenalCp = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
-    id_bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
-    id_cidade = models.ForeignKey(CidadeMg, on_delete=models.CASCADE )
+    Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
+    Cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE )
 
     class Meta:
         managed = True
@@ -213,13 +221,13 @@ class SuspeitoAlvo(models.Model):
 
 
 class SuspeitoCidade(models.Model):
-    CidadeMg = models.ForeignKey(CidadeMg, on_delete=models.CASCADE )
+    Cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE )
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
 
     class Meta:
         managed = True
         db_table = 'SUSPEITO_CIDADE'
-        unique_together = (('CidadeMg', 'Suspeito'),)
+        unique_together = (('Cidade', 'Suspeito'),)
 
 
 class SuspeitoEventos(models.Model):

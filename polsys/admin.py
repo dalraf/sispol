@@ -5,6 +5,9 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Alvo
+from .models import *
 
-admin.site.register(Alvo)
+admin.site.register(Evento)
+admin.site.register(Bairro)
+admin.site.register(Cidade)
+

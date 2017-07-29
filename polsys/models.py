@@ -100,10 +100,10 @@ class Comparsas(models.Model):
 
 
 class Evento(models.Model):
-    data = models.DateField(blank=True, null=True)
-    horario = models.TimeField(blank=True, null=True)
-    reds = models.CharField(max_length=19, blank=True, null=True)
-    is_disparo_via_publica = models.IntegerField('Disparos em via públicas', help_text='Quantidade de disparos em via pública')
+    data = models.DateField()
+    horario = models.TimeField()
+    reds = models.CharField(max_length=19)
+    is_disparo_via_publica = models.IntegerField('Disparos em via públicas', blank=True, null=True)
     is_disparo_bpm = models.BooleanField('Disparo BPM')
     is_disparo_dpc = models.BooleanField('Disparo DPC')
     is_troca_de_tiros = models.BooleanField('Troca de Tiros')
@@ -265,7 +265,7 @@ class TipoEnvolvimentoSuspeito(models.Model):
 
 class TipoPenalCp(models.Model):
     nome = models.CharField('Pena',max_length=50, blank=True, null=True)
-    art = models.IntegerField(blank=True, null=True)
+    art = models.DecimalField(max_digits=10, decimal_places=0)
     paragrafo = models.CharField(max_length=10, blank=True, null=True)
     inciso = models.CharField(max_length=10, blank=True, null=True)
     alinea = models.CharField(max_length=10, blank=True, null=True)

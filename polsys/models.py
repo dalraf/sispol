@@ -9,7 +9,7 @@ from django.db import models
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+#   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 
 class Alvo(models.Model):
@@ -18,7 +18,7 @@ class Alvo(models.Model):
     id_tipo_alvo = models.ForeignKey('TipoAlvo', models.DO_NOTHING, db_column='id_tipo_alvo')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ALVO'
 
 
@@ -30,7 +30,7 @@ class AlvoEvento(models.Model):
     id_objeto_alvo = models.ForeignKey('ObjetoAlvo', models.DO_NOTHING, db_column='id_objeto_alvo', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ALVO_EVENTO'
         unique_together = (('id_alvo', 'id_evento'),)
 
@@ -45,7 +45,7 @@ class Armamento(models.Model):
     id_tipo_armamento = models.ForeignKey('TipoArmamento', models.DO_NOTHING, db_column='id_tipo_armamento')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ARMAMENTO'
 
 
@@ -54,7 +54,7 @@ class ArmamentoEvento(models.Model):
     id_evento = models.ForeignKey('Evento', models.DO_NOTHING, db_column='id_evento')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ARMAMENTO_EVENTO'
         unique_together = (('id_armamento', 'id_evento'),)
 
@@ -65,7 +65,7 @@ class Bairro(models.Model):
     id_cidade = models.ForeignKey('CidadeMg', models.DO_NOTHING, db_column='id_cidade')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'BAIRRO'
 
 
@@ -81,7 +81,7 @@ class CidadeMg(models.Model):
     uf_fronteira = models.CharField(max_length=2, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'CIDADE_MG'
 
 
@@ -90,7 +90,7 @@ class Comparsas(models.Model):
     id_suspeito_secundario = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito_secundario' , related_name="suspeitosecundario")
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'COMPARSAS'
         unique_together = (('id_suspeito_primario', 'id_suspeito_secundario'),)
 
@@ -112,7 +112,7 @@ class Evento(models.Model):
     id_cidade = models.ForeignKey(CidadeMg, models.DO_NOTHING, db_column='id_cidade')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'EVENTO'
 
 
@@ -122,7 +122,7 @@ class FabricanteArmamento(models.Model):
     pais = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'FABRICANTE_ARMAMENTO'
 
 
@@ -131,7 +131,7 @@ class Faccao(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'FACCAO'
 
 
@@ -141,7 +141,7 @@ class Material(models.Model):
     is_venda_controlada = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'MATERIAL'
 
 
@@ -150,7 +150,7 @@ class MaterialEvento(models.Model):
     id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'MATERIAL_EVENTO'
         unique_together = (('id_material', 'id_evento'),)
 
@@ -160,7 +160,7 @@ class ModusOperandi(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'MODUS_OPERANDI'
 
 
@@ -169,7 +169,7 @@ class ObjetoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'OBJETO_ALVO'
 
 
@@ -178,7 +178,7 @@ class SupeitoCrimes(models.Model):
     id_suspeito = models.ForeignKey('Suspeito', models.DO_NOTHING, db_column='id_suspeito')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'SUPEITO_CRIMES'
         unique_together = (('id_tipo_penal', 'id_suspeito'),)
 
@@ -208,7 +208,7 @@ class Suspeito(models.Model):
     id_faccao = models.ForeignKey(Faccao, models.DO_NOTHING, db_column='id_faccao')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'SUSPEITO'
 
 
@@ -218,7 +218,7 @@ class SuspeitoAlvo(models.Model):
     data_inclusao = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'SUSPEITO_ALVO'
         unique_together = (('id_evento', 'id_suspeito'),)
 
@@ -228,7 +228,7 @@ class SuspeitoCidade(models.Model):
     id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'SUSPEITO_CIDADE'
         unique_together = (('id_cidade', 'id_suspeito'),)
 
@@ -238,7 +238,7 @@ class SuspeitoEventos(models.Model):
     id_suspeito = models.ForeignKey(Suspeito, models.DO_NOTHING, db_column='id_suspeito')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'SUSPEITO_EVENTOS'
         unique_together = (('id_evento', 'id_suspeito'),)
 
@@ -248,7 +248,7 @@ class TipoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'TIPO_ALVO'
 
 
@@ -257,7 +257,7 @@ class TipoArmamento(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'TIPO_ARMAMENTO'
 
 
@@ -266,7 +266,7 @@ class TipoEnvolvimentoSuspeito(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'TIPO_ENVOLVIMENTO_SUSPEITO'
 
 
@@ -280,7 +280,7 @@ class TipoPenalCp(models.Model):
     item = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'TIPO_PENAL_CP'
 
 
@@ -289,7 +289,7 @@ class TipoSituacaoPrisional(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'TIPO_SITUACAO_PRISIONAL'
 
 
@@ -298,7 +298,7 @@ class UnidadePrisional(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'UNIDADE_PRISIONAL'
 
 
@@ -316,7 +316,7 @@ class Veiculo(models.Model):
     cpf_proprietario = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'VEICULO'
 
 
@@ -325,6 +325,6 @@ class VeiculoEvento(models.Model):
     id_evento = models.ForeignKey(Evento, models.DO_NOTHING, db_column='id_evento')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'VEICULO_EVENTO'
         unique_together = (('id_veiculo', 'id_evento'),)

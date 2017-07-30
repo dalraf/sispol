@@ -242,7 +242,7 @@ class Suspeito(models.Model):
     nome = models.CharField(max_length=100,)
     alcunha = models.CharField(max_length=200,)
     rg = models.DecimalField(max_digits=10, decimal_places=0,)
-    cpf = models.IntegerField(blank=True,)
+    cpf = models.DecimalField(max_digits=10, decimal_places=0,)
     naturalidade = models.CharField(max_length=100, blank=True, null=True)
     uf = models.CharField(max_length=2, blank=True, null=True)
     data_nascimento = models.DateField('Data de Nascimento',blank=True, null=True)

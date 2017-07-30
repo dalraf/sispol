@@ -16,7 +16,7 @@ class Alvo(models.Model):
     nome = models.CharField(max_length=150, blank=True, null=True)
     TipoAlvo = models.ForeignKey('TipoAlvo', on_delete=models.CASCADE )
     
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -31,7 +31,7 @@ class AlvoEvento(models.Model):
     ModusOperandi = models.ForeignKey('ModusOperandi', verbose_name = 'Modus Operandi', on_delete=models.CASCADE )
     ObjetoAlvo = models.ForeignKey('ObjetoAlvo', verbose_name = 'Objeto Alvo', on_delete=models.CASCADE, blank=True, null=True)
     
-    def __str__(self):
+    def __unicode__(self):
         return self.Alvo.nome
 
     class Meta:
@@ -50,7 +50,7 @@ class Armamento(models.Model):
     FabricanteArmamento = models.ForeignKey('FabricanteArmamento', verbose_name = 'Fabricante do Armamento', on_delete=models.CASCADE )
     TipoArmamento = models.ForeignKey('TipoArmamento', verbose_name = 'Tipo de Armamento', on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -62,7 +62,7 @@ class ArmamentoEvento(models.Model):
     Armamento = models.ForeignKey('Armamento', on_delete=models.CASCADE )
     Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.Armamento.nome + ' / ' + self.Evento.reds
 
     class Meta:
@@ -77,7 +77,7 @@ class Bairro(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
     Cidade = models.ForeignKey('Cidade', on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -95,7 +95,7 @@ class Cidade(models.Model):
     departamento_pcmg = models.CharField(max_length=10, blank=True, null=True)
     uf_fronteira = models.CharField(max_length=2, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -107,7 +107,7 @@ class Comparsas(models.Model):
     SuspeitoPrimario = models.ForeignKey('Suspeito', on_delete=models.CASCADE , verbose_name = 'Suspeito Primário', related_name="SuspeitoPrimario" )
     SuspeitoSecundario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, verbose_name = 'Suspeito Secundario', related_name="SuspeitoSecundario")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.SuspeitosSecundario.nome
 
     class Meta:
@@ -132,7 +132,7 @@ class Evento(models.Model):
     TipoPenalCp = models.ForeignKey('TipoPenalCp',verbose_name="Pena",on_delete=models.CASCADE )
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.reds
 
  
@@ -145,7 +145,7 @@ class FabricanteArmamento(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
     pais = models.CharField(max_length=100, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -158,7 +158,7 @@ class FabricanteArmamento(models.Model):
 class Faccao(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -173,7 +173,7 @@ class Material(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
     is_venda_controlada = models.BooleanField('Venda Controlada')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -186,7 +186,7 @@ class MaterialEvento(models.Model):
     Material = models.ForeignKey(Material, on_delete=models.CASCADE )
     Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.Material.nome
 
     class Meta:
@@ -200,7 +200,7 @@ class MaterialEvento(models.Model):
 class ModusOperandi(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -213,7 +213,7 @@ class ModusOperandi(models.Model):
 class ObjetoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -227,7 +227,7 @@ class SupeitoCrimes(models.Model):
     TipoPenalCp = models.ForeignKey('TipoPenalCp', verbose_name = 'Pena', on_delete=models.CASCADE )
     Suspeito = models.ForeignKey('Suspeito', on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.TipoPenalCp.nome
 
     class Meta:
@@ -261,7 +261,7 @@ class Suspeito(models.Model):
     is_confronto_policia = models.BooleanField('Confronto polícia')
     id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -274,7 +274,7 @@ class SuspeitoAlvo(models.Model):
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
     data_inclusao = models.DateField('Data da Inclusão',blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.Evento.reds + ' / ' +  str(self.data_inclusao)
 
     class Meta:
@@ -289,7 +289,7 @@ class SuspeitoCidade(models.Model):
     Cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE )
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.Cidade.nome
 
     class Meta:
@@ -302,7 +302,7 @@ class SuspeitoEventos(models.Model):
     Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.Evento.reds + ' / ' + self.Suspeito.nome
 
     class Meta:
@@ -316,7 +316,7 @@ class SuspeitoEventos(models.Model):
 class TipoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -329,7 +329,7 @@ class TipoAlvo(models.Model):
 class TipoArmamento(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -342,7 +342,7 @@ class TipoArmamento(models.Model):
 class TipoEnvolvimentoSuspeito(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -360,7 +360,7 @@ class TipoPenalCp(models.Model):
     alinea = models.CharField(max_length=10, blank=True, null=True)
     item = models.CharField(max_length=10, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -372,7 +372,7 @@ class TipoPenalCp(models.Model):
 class TipoSituacaoPrisional(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -385,7 +385,7 @@ class TipoSituacaoPrisional(models.Model):
 class UnidadePrisional(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     class Meta:
@@ -408,7 +408,7 @@ class Veiculo(models.Model):
     cpf_proprietario = models.IntegerField('CPF do proprietário',blank=True, null=True)
 
 
-    def __str__(self):
+    def __unicode__(self):
         return self.placa + ' / ' + self.nome + ' / ' + self.fabricante
 
     class Meta:
@@ -422,7 +422,7 @@ class VeiculoEvento(models.Model):
     Veiculo = models.ForeignKey(Veiculo, verbose_name = 'Veículos' , on_delete=models.CASCADE )
     Evento = models.ForeignKey(Evento, verbose_name = 'Evento' , on_delete=models.CASCADE )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.Veiculo.nome
 
     class Meta:

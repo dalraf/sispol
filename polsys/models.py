@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from django.utils.safestring import mark_safe
+
 # Create your models here.
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
@@ -261,6 +263,10 @@ class Suspeito(models.Model):
     is_alta_periculosidade = models.BooleanField('Alta periculosidade')
     is_confronto_policia = models.BooleanField('Confronto polícia')
     id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE )
+
+    def image_tag(self):
+        return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.foto))
+    image_tag.short_description = 'Imagem'
 
     def __unicode__(self):
         return self.nome

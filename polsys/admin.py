@@ -66,11 +66,11 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     list_filter = (('data_nascimento', DateRangeFilter ),)
     inlines = [SuspeitoCrimesInc,SuspeitoEventosInc,ComparsasInc]
     search_fields = ('nome',)
+    readonly_fields = ('image_tag',)
     fieldsets = [
-        ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto','foto']}),
+        ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto','foto','image_tag']}),
         ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao']}),
     ]
-
 class VeiculoDetalhe(admin.ModelAdmin):
     #    fields = ['data', 'horario', 'reds']
     model = Veiculo

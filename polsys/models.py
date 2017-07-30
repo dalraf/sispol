@@ -275,7 +275,7 @@ class SuspeitoAlvo(models.Model):
     data_inclusao = models.DateField('Data da Inclusão',blank=True, null=True)
 
     def __str__(self):
-        return self.Evento.reds + ' / ' +  self.data_inclusao
+        return self.Evento.reds + ' / ' +  str(self.data_inclusao)
 
     class Meta:
         managed = True
@@ -317,7 +317,7 @@ class TipoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return self.Cidade.nome
+        return self.nome
 
     class Meta:
         managed = True

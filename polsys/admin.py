@@ -13,12 +13,46 @@ admin.site.site_header = 'Sistema Policial'
 admin.site.site_title = 'Sistema Policial'
 admin.site.index_title = 'Sistema Policial'
 
+class VeiculoEventoInc(admin.TabularInline):
+    model = VeiculoEvento
+    extra = 1
+
+class SuspeitoEventosInc(admin.TabularInline):
+    model = SuspeitoEventos
+    extra = 1
+
+class SuspeitoAlvoInc(admin.TabularInline):
+    model = SuspeitoAlvo
+    extra = 1
+
+class SuspeitoCrimesInc(admin.TabularInline):
+    model = SupeitoCrimes
+    extra = 1
+
+class MaterialEventoInc(admin.TabularInline):
+    model = MaterialEvento
+    extra = 1
+
+class ComparsasInc(admin.TabularInline):
+    model = Comparsas
+    extra = 1
+    fk_name = 'SuspeitoPrimario'
+
+class ArmamentoEventoInc(admin.TabularInline):
+    model = ArmamentoEvento
+    extra = 1
+
+class AlvoEventoInc(admin.TabularInline):
+    model = AlvoEvento
+    extra = 1
+
 class EventoDetalhe(admin.ModelAdmin):
 #    fields = ['data', 'horario', 'reds']
     model = Evento
     list_display = ('reds', 'data', 'horario' )
     list_filter = (('data', DateRangeFilter ),)
     search_fields = ('reds',)
+    inlines = [SuspeitoEventosInc,SuspeitoAlvoInc,VeiculoEventoInc,MaterialEventoInc,ArmamentoEventoInc,AlvoEventoInc]
     fieldsets = [
         (None,{'fields': ['data', 'horario', 'reds']}),
         ('Detalhes', {'fields': ['is_disparo_via_publica','is_disparo_bpm','is_disparo_dpc','is_troca_de_tiros','is_encapuzados','is_colete_balistico','is_miguelitos_fuga']}),
@@ -30,16 +64,12 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     model = Suspeito
     list_display = ('nome', 'rg', 'data_nascimento' )
     list_filter = (('data_nascimento', DateRangeFilter ),)
+    inlines = [SuspeitoCrimesInc,SuspeitoEventosInc,ComparsasInc]
     search_fields = ('nome',)
     fieldsets = [
         ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto',]}),
         ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao']}),
     ]
-
-class VeiculoEventoInc(admin.TabularInline):
-    model = VeiculoEvento
-    extra = 1
-
 
 class VeiculoDetalhe(admin.ModelAdmin):
     #    fields = ['data', 'horario', 'reds']
@@ -64,7 +94,8 @@ admin.site.register(TipoSituacaoPrisional)
 admin.site.register(UnidadePrisional)
 admin.site.register(Veiculo,VeiculoDetalhe)
 admin.site.register(TipoEnvolvimentoSuspeito)
-
+admin.site.register(TipoAlvo)
+admin.site.register(SuspeitoAlvo)
 
 
 

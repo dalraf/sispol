@@ -27,13 +27,18 @@ class AlvoEvento(models.Model):
     Alvo = models.ForeignKey(Alvo, on_delete=models.CASCADE )
     Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
     Consumado = models.BooleanField()
-    ModusOperandi = models.ForeignKey('ModusOperandi', on_delete=models.CASCADE )
-    ObjetoAlvo = models.ForeignKey('ObjetoAlvo', on_delete=models.CASCADE, blank=True, null=True)
+    ModusOperandi = models.ForeignKey('ModusOperandi', verbose_name = 'Modus Operandi', on_delete=models.CASCADE )
+    ObjetoAlvo = models.ForeignKey('ObjetoAlvo', verbose_name = 'Objeto Alvo', on_delete=models.CASCADE, blank=True, null=True)
+    
+    def __str__(self):
+        return self.Alvo.nome + ' / ' + self.Evento.reds
 
     class Meta:
         managed = True
         db_table = 'ALVO_EVENTO'
         unique_together = (('Alvo', 'Evento'),)
+        verbose_name = 'Alvo Eventos'
+        verbose_name_plural = 'Alvos Eventos'
 
 
 class Armamento(models.Model):
@@ -53,10 +58,15 @@ class ArmamentoEvento(models.Model):
     Armamento = models.ForeignKey('Armamento', on_delete=models.CASCADE )
     Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
 
+    def __str__(self):
+        return self.Armamento.nome + ' / ' + self.Evento.reds
+
     class Meta:
         managed = True
         db_table = 'ARMAMENTO_EVENTO'
         unique_together = (('Armamento', 'Evento'),)
+        verbose_name = 'Armamento Evento'
+        verbose_name_plural = 'Armamentos Eventos'
 
 
 class Bairro(models.Model):
@@ -90,13 +100,18 @@ class Cidade(models.Model):
 
 
 class Comparsas(models.Model):
-    SuspeitoPrimario = models.ForeignKey('Suspeito', on_delete=models.CASCADE , related_name="SuspeitoPrimario" )
-    SuspeitoSecundario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, related_name="SuspeitoSecundario")
+    SuspeitoPrimario = models.ForeignKey('Suspeito', on_delete=models.CASCADE , verbose_name = 'Suspeito Primário', related_name="SuspeitoPrimario" )
+    SuspeitoSecundario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, verbose_name = 'Suspeito Secundario', related_name="SuspeitoSecundario")
+
+    def __str__(self):
+        return self.SuspeitoPrimario.nome + ' / ' + self.SuspeitosSecundario.nome
 
     class Meta:
         managed = True
         db_table = 'COMPARSAS'
         unique_together = (('SuspeitoPrimario', 'SuspeitoSecundario'),)
+        verbose_name = 'Comparsa'
+        verbose_name_plural = 'Comparsas'
 
 
 class Evento(models.Model):
@@ -158,10 +173,15 @@ class MaterialEvento(models.Model):
     Material = models.ForeignKey(Material, on_delete=models.CASCADE )
     Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
 
+    def __str__(self):
+        return self.Material.nome + ' / ' + self.Evento.reds
+
     class Meta:
         managed = True
         db_table = 'MATERIAL_EVENTO'
         unique_together = (('Material', 'Evento'),)
+        verbose_name = 'Material Evento'
+        verbose_name_plural = 'Materiais Eventos'
 
 
 class ModusOperandi(models.Model):
@@ -185,13 +205,18 @@ class ObjetoAlvo(models.Model):
 
 
 class SupeitoCrimes(models.Model):
-    TipoPenalCp = models.ForeignKey('TipoPenalCp', on_delete=models.CASCADE )
+    TipoPenalCp = models.ForeignKey('TipoPenalCp', verbose_name = 'Pena', on_delete=models.CASCADE )
     Suspeito = models.ForeignKey('Suspeito', on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.TipoPenalCp.nome + ' / ' + self.Suspeito.nome
 
     class Meta:
         managed = True
         db_table = 'SUPEITO_CRIMES'
         unique_together = (('TipoPenalCp', 'Suspeito'),)
+        verbose_name = 'Suspeito Crime'
+        verbose_name_plural = 'Suspeitos Crimes'
 
 
 class Suspeito(models.Model):
@@ -225,12 +250,17 @@ class Suspeito(models.Model):
 class SuspeitoAlvo(models.Model):
     Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
-    data_inclusao = models.DateField(blank=True, null=True)
+    data_inclusao = models.DateField('Data da Inclusão',blank=True, null=True)
+
+    def __str__(self):
+        return self.Evento.reds + ' / ' + self.Suspeito.nome + ' / ' + self.data_inclusao
 
     class Meta:
         managed = True
         db_table = 'SUSPEITO_ALVO'
         unique_together = (('Evento', 'Suspeito'),)
+        verbose_name = 'Suspeito Alvo'
+        verbose_name_plural = 'Suspeitos Alvos'
 
 
 class SuspeitoCidade(models.Model):
@@ -251,6 +281,8 @@ class SuspeitoEventos(models.Model):
         managed = True
         db_table = 'SUSPEITO_EVENTOS'
         unique_together = (('Evento', 'Suspeito'),)
+        verbose_name = 'Suspeito Eventos'
+        verbose_name_plural = 'Suspeitos em Eventos'
 
 
 class TipoAlvo(models.Model):
@@ -259,6 +291,8 @@ class TipoAlvo(models.Model):
     class Meta:
         managed = True
         db_table = 'TIPO_ALVO'
+        verbose_name = 'Tipo de Alvo'
+        verbose_name_plural = 'Tipos de Alvo'
 
 
 class TipoArmamento(models.Model):
@@ -330,6 +364,10 @@ class Veiculo(models.Model):
     is_alugado = models.BooleanField('Alugado')
     cpf_proprietario = models.IntegerField('CPF do proprietário',blank=True, null=True)
 
+
+    def __str__(self):
+        return self.placa + ' / ' + self.nome + ' / ' + self.fabricante
+
     class Meta:
         managed = True
         db_table = 'VEICULO'
@@ -338,8 +376,8 @@ class Veiculo(models.Model):
 
 
 class VeiculoEvento(models.Model):
-    Veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE )
-    Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
+    Veiculo = models.ForeignKey(Veiculo, verbose_name = 'Veículos' , on_delete=models.CASCADE )
+    Evento = models.ForeignKey(Evento, verbose_name = 'Evento' , on_delete=models.CASCADE )
 
     class Meta:
         managed = True

@@ -38,11 +38,11 @@ class AlvoEvento(models.Model):
 
 class Armamento(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
-    is_artesanal = models.BooleanField()
+    is_artesanal = models.BooleanField("Arsenal")
     calibre = models.CharField(max_length=10, blank=True, null=True)
     numeracao = models.CharField(max_length=10, blank=True, null=True)
-    FabricanteArmamento = models.ForeignKey('FabricanteArmamento', on_delete=models.CASCADE )
-    TipoArmamento = models.ForeignKey('TipoArmamento', on_delete=models.CASCADE )
+    FabricanteArmamento = models.ForeignKey('FabricanteArmamento', verbose_name = 'Fabricante do Armamento', on_delete=models.CASCADE )
+    TipoArmamento = models.ForeignKey('TipoArmamento', verbose_name = 'Tipo de Armamento', on_delete=models.CASCADE )
 
     class Meta:
         managed = True
@@ -50,7 +50,7 @@ class Armamento(models.Model):
 
 
 class ArmamentoEvento(models.Model):
-    Armamento = models.ForeignKey(Armamento, on_delete=models.CASCADE )
+    Armamento = models.ForeignKey('Armamento', on_delete=models.CASCADE )
     Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
 
     class Meta:
@@ -112,6 +112,10 @@ class Evento(models.Model):
     is_miguelitos_fuga = models.BooleanField('Miguelitos Fuga')
     TipoPenalCp = models.ForeignKey('TipoPenalCp',verbose_name="Pena",on_delete=models.CASCADE )
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.reds
+
  
     class Meta:
         managed = True
@@ -125,6 +129,8 @@ class FabricanteArmamento(models.Model):
     class Meta:
         managed = True
         db_table = 'FABRICANTE_ARMAMENTO'
+        verbose_name = 'Fabricante do Armamento'
+        verbose_name_plural = 'Fabricantes de Armamento'
 
 
 class Faccao(models.Model):
@@ -133,15 +139,19 @@ class Faccao(models.Model):
     class Meta:
         managed = True
         db_table = 'FACCAO'
+        verbose_name = 'Facção'
+        verbose_name_plural = 'Facções'
+
 
 
 class Material(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
-    is_venda_controlada = models.BooleanField()
+    is_venda_controlada = models.BooleanField('Venda Controlada')
 
     class Meta:
         managed = True
         db_table = 'MATERIAL'
+        verbose_name_plural = 'Materiais'
 
 
 class MaterialEvento(models.Model):
@@ -160,6 +170,8 @@ class ModusOperandi(models.Model):
     class Meta:
         managed = True
         db_table = 'MODUS_OPERANDI'
+        verbose_name = 'Modus Operandis'
+        verbose_name_plural = 'Modi Operandi'
 
 
 class ObjetoAlvo(models.Model):
@@ -168,6 +180,8 @@ class ObjetoAlvo(models.Model):
     class Meta:
         managed = True
         db_table = 'OBJETO_ALVO'
+        verbose_name = 'Objeto Alvo'
+        verbose_name_plural = 'Objetos Alvo'
 
 
 class SupeitoCrimes(models.Model):
@@ -181,27 +195,27 @@ class SupeitoCrimes(models.Model):
 
 
 class Suspeito(models.Model):
-    nome = models.CharField(max_length=100, blank=True, null=True)
-    alcunha = models.CharField(max_length=200, blank=True, null=True)
-    rg = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
-    cpf = models.IntegerField(blank=True, null=True)
+    nome = models.CharField(max_length=100,)
+    alcunha = models.CharField(max_length=200,)
+    rg = models.DecimalField(max_digits=10, decimal_places=0,)
+    cpf = models.IntegerField(blank=True,)
     naturalidade = models.CharField(max_length=100, blank=True, null=True)
     uf = models.CharField(max_length=2, blank=True, null=True)
-    data_nascimento = models.DateField(blank=True, null=True)
-    nome_da_mae = models.CharField(max_length=100, blank=True, null=True)
+    data_nascimento = models.DateField('Data de Nascimento',blank=True, null=True)
+    nome_da_mae = models.CharField('Nome da mãe',max_length=100, blank=True, null=True)
     infopen = models.IntegerField(blank=True, null=True)
-    regiao = models.CharField(max_length=100, blank=True, null=True)
-    is_foto = models.BooleanField()
+    regiao = models.CharField('Região',max_length=100, blank=True, null=True)
+    is_foto = models.BooleanField('Foto')
     fonte = models.CharField(max_length=50, blank=True, null=True)
-    ModusOperandi = models.ForeignKey(ModusOperandi, on_delete=models.CASCADE )
-    TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', on_delete=models.CASCADE )
-    TipoSituacaoPrisional = models.ForeignKey('TipoSituacaoPrisional', on_delete=models.CASCADE )
-    data_ultima_prisao = models.DateField(blank=True, null=True)
-    UnidadePrisional = models.ForeignKey('UnidadePrisional', on_delete=models.CASCADE )
-    is_monitoramento_sige = models.BooleanField()
-    is_alta_periculosidade = models.BooleanField()
-    is_confronto_policia = models.BooleanField()
-    id_faccao = models.ForeignKey(Faccao, on_delete=models.CASCADE )
+    ModusOperandi = models.ForeignKey(ModusOperandi, verbose_name='Modus Operandi', on_delete=models.CASCADE )
+    TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', verbose_name='Tipo de envolvimento do Suspeito' , on_delete=models.CASCADE )
+    TipoSituacaoPrisional = models.ForeignKey('TipoSituacaoPrisional', verbose_name='Tipo de situação prisional', on_delete=models.CASCADE )
+    data_ultima_prisao = models.DateField('Data da última prisão',blank=True, null=True)
+    UnidadePrisional = models.ForeignKey('UnidadePrisional', verbose_name='Unidade Prisional', on_delete=models.CASCADE )
+    is_monitoramento_sige = models.BooleanField('Monitoramento Sige')
+    is_alta_periculosidade = models.BooleanField('Alta periculosidade')
+    is_confronto_policia = models.BooleanField('Confronto polícia')
+    id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE )
 
     class Meta:
         managed = True
@@ -253,6 +267,8 @@ class TipoArmamento(models.Model):
     class Meta:
         managed = True
         db_table = 'TIPO_ARMAMENTO'
+        verbose_name = 'Tipo de Armamento'
+        verbose_name_plural = 'Tipos de Armamento'
 
 
 class TipoEnvolvimentoSuspeito(models.Model):
@@ -261,6 +277,8 @@ class TipoEnvolvimentoSuspeito(models.Model):
     class Meta:
         managed = True
         db_table = 'TIPO_ENVOLVIMENTO_SUSPEITO'
+        verbose_name = 'Tipo de envolvimento de Suspeito'
+        verbose_name_plural = 'Tipos de envolvimento de Suspeito'
 
 
 class TipoPenalCp(models.Model):
@@ -286,6 +304,8 @@ class TipoSituacaoPrisional(models.Model):
     class Meta:
         managed = True
         db_table = 'TIPO_SITUACAO_PRISIONAL'
+        verbose_name = 'Tipo de Situação Prisional'
+        verbose_name_plural = 'Tipos de Situação Prisional'
 
 
 class UnidadePrisional(models.Model):
@@ -294,23 +314,27 @@ class UnidadePrisional(models.Model):
     class Meta:
         managed = True
         db_table = 'UNIDADE_PRISIONAL'
+        verbose_name = 'Unidade Prisional'
+        verbose_name_plural = 'Unidades Prisionais'
 
 
 class Veiculo(models.Model):
     placa = models.CharField(max_length=10, blank=True, null=True)
     nome = models.CharField(max_length=10, blank=True, null=True)
     fabricante = models.CharField(max_length=10, blank=True, null=True)
-    is_caminhonete = models.BooleanField()
-    is_importado = models.BooleanField()
-    is_moto = models.BooleanField()
-    is_clonado = models.BooleanField()
-    is_roubado_furtado = models.BooleanField()
-    is_alugado = models.BooleanField()
-    cpf_proprietario = models.IntegerField(blank=True, null=True)
+    is_caminhonete = models.BooleanField('Caminhonete')
+    is_importado = models.BooleanField('Importado')
+    is_moto = models.BooleanField('Moto')
+    is_clonado = models.BooleanField('Clonado')
+    is_roubado_furtado = models.BooleanField('Roubado/Furtado')
+    is_alugado = models.BooleanField('Alugado')
+    cpf_proprietario = models.IntegerField('CPF do proprietário',blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'VEICULO'
+        verbose_name = 'Veículo'
+        verbose_name_plural = 'Veículos'
 
 
 class VeiculoEvento(models.Model):
@@ -321,3 +345,5 @@ class VeiculoEvento(models.Model):
         managed = True
         db_table = 'VEICULO_EVENTO'
         unique_together = (('Veiculo', 'Evento'),)
+        verbose_name = 'Veículo em evento'
+        verbose_name_plural = 'Veículos em eventos'

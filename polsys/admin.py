@@ -67,7 +67,7 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     inlines = [SuspeitoCrimesInc,SuspeitoEventosInc,ComparsasInc]
     search_fields = ('nome',)
     fieldsets = [
-        ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto',]}),
+        ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto','foto']}),
         ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao']}),
     ]
 

@@ -250,6 +250,7 @@ class Suspeito(models.Model):
     infopen = models.IntegerField('INFOPEN',blank=True, null=True)
     regiao = models.CharField('Região',max_length=100, blank=True, null=True)
     is_foto = models.BooleanField('Foto')
+    foto = models.ImageField('Foto Arquivo',upload_to='fotosuspeito', null=True)
     fonte = models.CharField(max_length=50, blank=True, null=True)
     ModusOperandi = models.ForeignKey(ModusOperandi, verbose_name='Modus Operandi', on_delete=models.CASCADE )
     TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', verbose_name='Tipo de envolvimento do Suspeito' , on_delete=models.CASCADE )

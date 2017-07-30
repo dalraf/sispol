@@ -15,36 +15,36 @@ admin.site.index_title = 'Sistema Policial'
 
 class VeiculoEventoInc(admin.TabularInline):
     model = VeiculoEvento
-    extra = 1
+    extra = 0
 
 class SuspeitoEventosInc(admin.TabularInline):
     model = SuspeitoEventos
-    extra = 1
+    extra = 0
 
 class SuspeitoAlvoInc(admin.TabularInline):
     model = SuspeitoAlvo
-    extra = 1
+    extra = 0
 
 class SuspeitoCrimesInc(admin.TabularInline):
     model = SupeitoCrimes
-    extra = 1
+    extra = 0
 
 class MaterialEventoInc(admin.TabularInline):
     model = MaterialEvento
-    extra = 1
+    extra = 0
 
 class ComparsasInc(admin.TabularInline):
     model = Comparsas
-    extra = 1
+    extra = 0
     fk_name = 'SuspeitoPrimario'
 
 class ArmamentoEventoInc(admin.TabularInline):
     model = ArmamentoEvento
-    extra = 1
+    extra = 0
 
 class AlvoEventoInc(admin.TabularInline):
     model = AlvoEvento
-    extra = 1
+    extra = 0
 
 class EventoDetalhe(admin.ModelAdmin):
 #    fields = ['data', 'horario', 'reds']

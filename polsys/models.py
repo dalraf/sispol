@@ -386,7 +386,7 @@ class UnidadePrisional(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.Cidade.nome
+        return self.nome
 
     class Meta:
         managed = True

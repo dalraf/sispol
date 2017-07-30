@@ -15,6 +15,7 @@ from django.db import models
 class Alvo(models.Model):
     nome = models.CharField(max_length=150, blank=True, null=True)
     TipoAlvo = models.ForeignKey('TipoAlvo', on_delete=models.CASCADE )
+    
     def __str__(self):
         return self.nome
 
@@ -31,7 +32,7 @@ class AlvoEvento(models.Model):
     ObjetoAlvo = models.ForeignKey('ObjetoAlvo', verbose_name = 'Objeto Alvo', on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self):
-        return self.Alvo.nome + ' / ' + self.Evento.reds
+        return self.Alvo.nome
 
     class Meta:
         managed = True
@@ -48,6 +49,9 @@ class Armamento(models.Model):
     numeracao = models.CharField(max_length=10, blank=True, null=True)
     FabricanteArmamento = models.ForeignKey('FabricanteArmamento', verbose_name = 'Fabricante do Armamento', on_delete=models.CASCADE )
     TipoArmamento = models.ForeignKey('TipoArmamento', verbose_name = 'Tipo de Armamento', on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         managed = True
@@ -104,7 +108,7 @@ class Comparsas(models.Model):
     SuspeitoSecundario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, verbose_name = 'Suspeito Secundario', related_name="SuspeitoSecundario")
 
     def __str__(self):
-        return self.SuspeitoPrimario.nome + ' / ' + self.SuspeitosSecundario.nome
+        return self.SuspeitosSecundario.nome
 
     class Meta:
         managed = True
@@ -141,6 +145,9 @@ class FabricanteArmamento(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
     pais = models.CharField(max_length=100, blank=True, null=True)
 
+    def __str__(self):
+        return self.nome
+
     class Meta:
         managed = True
         db_table = 'FABRICANTE_ARMAMENTO'
@@ -150,6 +157,9 @@ class FabricanteArmamento(models.Model):
 
 class Faccao(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         managed = True
@@ -163,6 +173,9 @@ class Material(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
     is_venda_controlada = models.BooleanField('Venda Controlada')
 
+    def __str__(self):
+        return self.nome
+
     class Meta:
         managed = True
         db_table = 'MATERIAL'
@@ -174,7 +187,7 @@ class MaterialEvento(models.Model):
     Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
 
     def __str__(self):
-        return self.Material.nome + ' / ' + self.Evento.reds
+        return self.Material.nome
 
     class Meta:
         managed = True
@@ -187,6 +200,9 @@ class MaterialEvento(models.Model):
 class ModusOperandi(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
 
+    def __str__(self):
+        return self.nome
+
     class Meta:
         managed = True
         db_table = 'MODUS_OPERANDI'
@@ -196,6 +212,9 @@ class ModusOperandi(models.Model):
 
 class ObjetoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         managed = True
@@ -209,7 +228,7 @@ class SupeitoCrimes(models.Model):
     Suspeito = models.ForeignKey('Suspeito', on_delete=models.CASCADE )
 
     def __str__(self):
-        return self.TipoPenalCp.nome + ' / ' + self.Suspeito.nome
+        return self.TipoPenalCp.nome
 
     class Meta:
         managed = True
@@ -242,6 +261,9 @@ class Suspeito(models.Model):
     is_confronto_policia = models.BooleanField('Confronto polícia')
     id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE )
 
+    def __str__(self):
+        return self.nome
+
     class Meta:
         managed = True
         db_table = 'SUSPEITO'
@@ -253,7 +275,7 @@ class SuspeitoAlvo(models.Model):
     data_inclusao = models.DateField('Data da Inclusão',blank=True, null=True)
 
     def __str__(self):
-        return self.Evento.reds + ' / ' + self.Suspeito.nome + ' / ' + self.data_inclusao
+        return self.Evento.reds + ' / ' +  self.data_inclusao
 
     class Meta:
         managed = True
@@ -267,6 +289,9 @@ class SuspeitoCidade(models.Model):
     Cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE )
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
 
+    def __str__(self):
+        return self.Cidade.nome
+
     class Meta:
         managed = True
         db_table = 'SUSPEITO_CIDADE'
@@ -276,6 +301,9 @@ class SuspeitoCidade(models.Model):
 class SuspeitoEventos(models.Model):
     Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.Evento.reds + ' / ' + self.Suspeito.nome
 
     class Meta:
         managed = True
@@ -288,6 +316,9 @@ class SuspeitoEventos(models.Model):
 class TipoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
+    def __str__(self):
+        return self.Cidade.nome
+
     class Meta:
         managed = True
         db_table = 'TIPO_ALVO'
@@ -298,6 +329,9 @@ class TipoAlvo(models.Model):
 class TipoArmamento(models.Model):
     nome = models.CharField(max_length=10, blank=True, null=True)
 
+    def __str__(self):
+        return self.nome
+
     class Meta:
         managed = True
         db_table = 'TIPO_ARMAMENTO'
@@ -307,6 +341,9 @@ class TipoArmamento(models.Model):
 
 class TipoEnvolvimentoSuspeito(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         managed = True
@@ -335,6 +372,9 @@ class TipoPenalCp(models.Model):
 class TipoSituacaoPrisional(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
+    def __str__(self):
+        return self.nome
+
     class Meta:
         managed = True
         db_table = 'TIPO_SITUACAO_PRISIONAL'
@@ -344,6 +384,9 @@ class TipoSituacaoPrisional(models.Model):
 
 class UnidadePrisional(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.Cidade.nome
 
     class Meta:
         managed = True
@@ -378,6 +421,9 @@ class Veiculo(models.Model):
 class VeiculoEvento(models.Model):
     Veiculo = models.ForeignKey(Veiculo, verbose_name = 'Veículos' , on_delete=models.CASCADE )
     Evento = models.ForeignKey(Evento, verbose_name = 'Evento' , on_delete=models.CASCADE )
+
+    def __str__(self):
+        return self.Veiculo.nome
 
     class Meta:
         managed = True

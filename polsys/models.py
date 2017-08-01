@@ -5,15 +5,6 @@ from django.db import models
 
 from django.utils.safestring import mark_safe
 
-# Create your models here.
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
-
 class Alvo(models.Model):
     nome = models.CharField(max_length=150, blank=True, null=True)
     TipoAlvo = models.ForeignKey('TipoAlvo', on_delete=models.CASCADE )
@@ -131,7 +122,7 @@ class Evento(models.Model):
     is_encapuzados = models.BooleanField('Encapuzados')
     is_colete_balistico = models.BooleanField('Colete Balístico')
     is_miguelitos_fuga = models.BooleanField('Miguelitos Fuga')
-    TipoPenalCp = models.ForeignKey('TipoPenalCp',verbose_name="Pena",on_delete=models.CASCADE )
+    Crime = models.ForeignKey('Crime',verbose_name="Crime",on_delete=models.CASCADE )
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
 
     def __unicode__(self):
@@ -226,16 +217,16 @@ class ObjetoAlvo(models.Model):
 
 
 class SupeitoCrimes(models.Model):
-    TipoPenalCp = models.ForeignKey('TipoPenalCp', verbose_name = 'Pena', on_delete=models.CASCADE )
+    Crime = models.ForeignKey('Crime', verbose_name = 'Crime', on_delete=models.CASCADE )
     Suspeito = models.ForeignKey('Suspeito', on_delete=models.CASCADE )
 
     def __unicode__(self):
-        return self.TipoPenalCp.nome
+        return self.Crime.nome
 
     class Meta:
         managed = True
         db_table = 'SUPEITO_CRIMES'
-        unique_together = (('TipoPenalCp', 'Suspeito'),)
+        unique_together = (('Crime', 'Suspeito'),)
         verbose_name = 'Suspeito Crime'
         verbose_name_plural = 'Suspeitos Crimes'
 
@@ -359,8 +350,8 @@ class TipoEnvolvimentoSuspeito(models.Model):
         verbose_name_plural = 'Tipos de envolvimento de Suspeito'
 
 
-class TipoPenalCp(models.Model):
-    nome = models.CharField('Pena',max_length=50, blank=True, null=True)
+class Crime(models.Model):
+    nome = models.CharField('Crime',max_length=50, blank=True, null=True)
     art = models.DecimalField(max_digits=10, decimal_places=0)
     paragrafo = models.CharField(max_length=10, blank=True, null=True)
     inciso = models.CharField(max_length=10, blank=True, null=True)
@@ -372,8 +363,8 @@ class TipoPenalCp(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'TIPO_PENAL_CP'
-        verbose_name = "Pena"
+        db_table = 'TIPO_CrimeL_CP'
+        verbose_name = "Crime"
 
 
 class TipoSituacaoPrisional(models.Model):

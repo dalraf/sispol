@@ -56,7 +56,7 @@ class EventoDetalhe(admin.ModelAdmin):
     fieldsets = [
         (None,{'fields': ['data', 'horario', 'reds']}),
         ('Detalhes', {'fields': ['is_disparo_via_publica','is_disparo_bpm','is_disparo_dpc','is_troca_de_tiros','is_encapuzados','is_colete_balistico','is_miguelitos_fuga']}),
-        (None,{'fields': ['TipoPenalCp', 'Bairro' ]}),
+        (None,{'fields': ['Crime', 'Bairro' ]}),
     ]
 
 class SuspeitoDetalhe(admin.ModelAdmin):
@@ -81,7 +81,7 @@ class VeiculoDetalhe(admin.ModelAdmin):
 admin.site.register(Suspeito,SuspeitoDetalhe)
 admin.site.register(Evento,EventoDetalhe)
 admin.site.register(Bairro)
-admin.site.register(TipoPenalCp)
+admin.site.register(Crime)
 admin.site.register(Cidade)
 admin.site.register(Armamento)
 admin.site.register(FabricanteArmamento)

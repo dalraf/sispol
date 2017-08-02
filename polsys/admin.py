@@ -51,7 +51,7 @@ class EventoDetalhe(admin.ModelAdmin):
     inlines = [SuspeitoAlvoInc,VeiculoEventoInc,MaterialEventoInc,ArmamentoEventoInc,AlvoEventoInc]
     fieldsets = [
         (None,{'fields': ['data', 'horario', 'reds']}),
-        ('Detalhes', {'fields': ['is_disparo_via_publica','is_disparo_bpm','is_disparo_dpc','is_troca_de_tiros','is_encapuzados','is_colete_balistico','is_miguelitos_fuga','ValorSubtraido']}),
+        ('Detalhes', {'fields': ['is_disparo_via_publica','is_disparo_bpm','is_disparo_dpc','is_troca_de_tiros','is_encapuzados','is_colete_balistico','is_miguelitos_fuga','ValorSubtraido', 'MassaSubtraida']}),
         (None,{'fields': ['Crime', 'Bairro' ]}),
     ]
 

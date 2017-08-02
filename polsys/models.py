@@ -297,21 +297,6 @@ class SuspeitoCidade(models.Model):
         unique_together = (('Cidade', 'Suspeito'),)
 
 
-class SuspeitoEventos(models.Model):
-    Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
-    Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
-
-    def __unicode__(self):
-        return self.Evento.reds + ' / ' + self.Suspeito.nome
-
-    class Meta:
-        managed = True
-        db_table = 'SUSPEITO_EVENTOS'
-        unique_together = (('Evento', 'Suspeito'),)
-        verbose_name = 'Suspeito Eventos'
-        verbose_name_plural = 'Suspeitos em Eventos'
-
-
 class TipoAlvo(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 

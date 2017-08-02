@@ -17,10 +17,6 @@ class VeiculoEventoInc(admin.TabularInline):
     model = VeiculoEvento
     extra = 0
 
-class SuspeitoEventosInc(admin.TabularInline):
-    model = SuspeitoEventos
-    extra = 0
-
 class SuspeitoAlvoInc(admin.TabularInline):
     model = SuspeitoAlvo
     extra = 0
@@ -52,7 +48,7 @@ class EventoDetalhe(admin.ModelAdmin):
     list_display = ('reds', 'data', 'horario' )
     list_filter = (('data', DateRangeFilter ),)
     search_fields = ('reds',)
-    inlines = [SuspeitoEventosInc,SuspeitoAlvoInc,VeiculoEventoInc,MaterialEventoInc,ArmamentoEventoInc,AlvoEventoInc]
+    inlines = [SuspeitoAlvoInc,VeiculoEventoInc,MaterialEventoInc,ArmamentoEventoInc,AlvoEventoInc]
     fieldsets = [
         (None,{'fields': ['data', 'horario', 'reds']}),
         ('Detalhes', {'fields': ['is_disparo_via_publica','is_disparo_bpm','is_disparo_dpc','is_troca_de_tiros','is_encapuzados','is_colete_balistico','is_miguelitos_fuga','ValorSubtraido']}),
@@ -64,7 +60,7 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     model = Suspeito
     list_display = ('nome', 'rg', 'data_nascimento' )
     list_filter = (('data_nascimento', DateRangeFilter ),)
-    inlines = [SuspeitoCrimesInc,SuspeitoEventosInc,ComparsasInc]
+    inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc,ComparsasInc]
     search_fields = ('nome',)
     readonly_fields = ('image_tag',)
     fieldsets = [

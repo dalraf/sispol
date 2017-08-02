@@ -123,6 +123,7 @@ class Evento(models.Model):
     is_colete_balistico = models.BooleanField('Colete Balístico')
     is_miguelitos_fuga = models.BooleanField('Miguelitos Fuga')
     Crime = models.ForeignKey('Crime',verbose_name="Crime",on_delete=models.CASCADE )
+    ValorSubtraido = models.DecimalField('Valor Subtraído (R$)',blank=True, null=True, max_digits=8, decimal_places=2 )
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
 
     def __unicode__(self):

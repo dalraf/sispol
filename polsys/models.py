@@ -250,7 +250,7 @@ class Suspeito(models.Model):
     is_alta_periculosidade = models.BooleanField('Alta periculosidade')
     is_confronto_policia = models.BooleanField('Confronto polícia')
     id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE , null=True, blank=True,)
-    Comparsas = models.ManyToManyField('self', verbose_name="Comparsas", blank=True, null=True, symmetrical=True)
+    Comparsas = models.ManyToManyField('self', verbose_name="Comparsas", blank=True, symmetrical=True)
     def image_tag(self):
         return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.foto))
     image_tag.short_description = 'Imagem'

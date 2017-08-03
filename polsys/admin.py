@@ -29,11 +29,6 @@ class MaterialEventoInc(admin.TabularInline):
     model = MaterialEvento
     extra = 0
 
-class ComparsasInc(admin.TabularInline):
-    model = Comparsas
-    extra = 0
-    fk_name = 'SuspeitoPrimario'
-
 class ArmamentoEventoInc(admin.TabularInline):
     model = ArmamentoEvento
     extra = 0
@@ -61,12 +56,12 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     model = Suspeito
     list_display = ('nome', 'rg', 'data_nascimento' )
     list_filter = (('data_nascimento', DateRangeFilter ),)
-    inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc,ComparsasInc]
+    inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc]
     search_fields = ('nome',)
     readonly_fields = ('image_tag',)
     fieldsets = [
         ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto','foto','image_tag',]}),
-        ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao']}),
+        ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao','comparsasn']}),
     ]
 class VeiculoDetalhe(admin.ModelAdmin):
     #    fields = ['data', 'horario', 'reds']

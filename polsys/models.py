@@ -96,21 +96,6 @@ class Cidade(models.Model):
         db_table = 'CIDADE_MG'
 
 
-class Comparsas(models.Model):
-    SuspeitoPrimario = models.ForeignKey('Suspeito', on_delete=models.CASCADE , verbose_name = 'Suspeito Primário', related_name="SuspeitoPrimario" )
-    SuspeitoSecundario = models.ForeignKey('Suspeito', on_delete=models.CASCADE, verbose_name = 'Suspeito Secundario', related_name="SuspeitoSecundario")
-
-    def __unicode__(self):
-        return self.SuspeitosSecundario.nome
-
-    class Meta:
-        managed = True
-        db_table = 'COMPARSAS'
-        unique_together = (('SuspeitoPrimario', 'SuspeitoSecundario'),)
-        verbose_name = 'Comparsa'
-        verbose_name_plural = 'Comparsas'
-
-
 class Evento(models.Model):
     data = models.DateField()
     horario = models.TimeField()
@@ -265,7 +250,7 @@ class Suspeito(models.Model):
     is_alta_periculosidade = models.BooleanField('Alta periculosidade')
     is_confronto_policia = models.BooleanField('Confronto polícia')
     id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE , null=True, blank=True,)
-
+    comparsasn = models.ManyToManyField('self', verbose_name="Comparsas", blank=True, null=True, symmetrical=True)
     def image_tag(self):
         return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.foto))
     image_tag.short_description = 'Imagem'

@@ -61,7 +61,7 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
     fieldsets = [
         ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto','foto','image_tag',]}),
-        ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao','comparsasn']}),
+        ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao','Comparsas']}),
     ]
 class VeiculoDetalhe(admin.ModelAdmin):
     #    fields = ['data', 'horario', 'reds']

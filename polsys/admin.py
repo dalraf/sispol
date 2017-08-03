@@ -56,6 +56,7 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     model = Suspeito
     list_display = ('nome', 'rg', 'data_nascimento' )
     list_filter = (('data_nascimento', DateRangeFilter ),)
+    filter_horizontal = ('Comparsas',)
     inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc]
     search_fields = ('nome',)
     readonly_fields = ('image_tag',)

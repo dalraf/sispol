@@ -29,10 +29,15 @@ class MaterialEventoInc(admin.TabularInline):
     model = MaterialEvento
     extra = 0
 
-class ComparsasInc(admin.TabularInline):
+class ComparsasIncPrimario(admin.TabularInline):
     model = Comparsas
     extra = 0
     fk_name = 'SuspeitoPrimario'
+
+class ComparsasIncSecundario(admin.TabularInline):
+    model = Comparsas
+    extra = 0
+    fk_name = 'SuspeitoSecundario'
 
 class ArmamentoEventoInc(admin.TabularInline):
     model = ArmamentoEvento
@@ -61,7 +66,7 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     model = Suspeito
     list_display = ('nome', 'rg', 'data_nascimento' )
     list_filter = (('data_nascimento', DateRangeFilter ),)
-    inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc,ComparsasInc]
+    inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc,ComparsasIncPrimario,ComparsasIncSecundario]
     search_fields = ('nome',)
     readonly_fields = ('image_tag',)
     fieldsets = [

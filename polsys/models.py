@@ -122,10 +122,10 @@ class Evento(models.Model):
     is_encapuzados = models.BooleanField('Encapuzados')
     is_colete_balistico = models.BooleanField('Colete Balístico')
     is_miguelitos_fuga = models.BooleanField('Miguelitos Fuga')
-    Crime = models.ForeignKey('Crime',verbose_name="Crime",on_delete=models.CASCADE )
+    Crime = models.ForeignKey('Crime',verbose_name="Crime",on_delete=models.CASCADE, null=True, blank=True, )
     ValorSubtraido = models.DecimalField('Valor Subtraído (R$)',blank=True, null=True, max_digits=8, decimal_places=2 )
     MassaSubtraida = models.DecimalField('Quantidade Subtraída (Kg)', blank=True, null=True,max_digits=10, decimal_places=3)
-    Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
+    Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE , null=True, blank=True,)
 
 
     def diadasemana(self):
@@ -254,17 +254,17 @@ class Suspeito(models.Model):
     infopen = models.IntegerField('INFOPEN',blank=True, null=True)
     regiao = models.CharField('Região',max_length=100, blank=True, null=True)
     is_foto = models.BooleanField('Foto')
-    foto = models.ImageField('Foto Arquivo',upload_to='fotosuspeito', null=True)
+    foto = models.ImageField('Foto Arquivo',upload_to='fotosuspeito', null=True, blank=True,)
     fonte = models.CharField(max_length=50, blank=True, null=True)
-    ModusOperandi = models.ForeignKey(ModusOperandi, verbose_name='Modus Operandi', on_delete=models.CASCADE )
-    TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', verbose_name='Tipo de envolvimento do Suspeito' , on_delete=models.CASCADE )
-    TipoSituacaoPrisional = models.ForeignKey('TipoSituacaoPrisional', verbose_name='Tipo de situação prisional', on_delete=models.CASCADE )
+    ModusOperandi = models.ForeignKey(ModusOperandi, verbose_name='Modus Operandi', on_delete=models.CASCADE , null=True, blank=True,)
+    TipoEnvolvimentoSuspeito = models.ForeignKey('TipoEnvolvimentoSuspeito', verbose_name='Tipo de envolvimento do Suspeito' , on_delete=models.CASCADE , null=True, blank=True,)
+    TipoSituacaoPrisional = models.ForeignKey('TipoSituacaoPrisional', verbose_name='Tipo de situação prisional', on_delete=models.CASCADE , null=True, blank=True,)
     data_ultima_prisao = models.DateField('Data da última prisão',blank=True, null=True)
-    UnidadePrisional = models.ForeignKey('UnidadePrisional', verbose_name='Unidade Prisional', on_delete=models.CASCADE )
+    UnidadePrisional = models.ForeignKey('UnidadePrisional', verbose_name='Unidade Prisional', on_delete=models.CASCADE , null=True, blank=True,)
     is_monitoramento_sige = models.BooleanField('Monitoramento Sige')
     is_alta_periculosidade = models.BooleanField('Alta periculosidade')
     is_confronto_policia = models.BooleanField('Confronto polícia')
-    id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE )
+    id_faccao = models.ForeignKey(Faccao, verbose_name='Facção', on_delete=models.CASCADE , null=True, blank=True,)
 
     def image_tag(self):
         return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.foto))

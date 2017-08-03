@@ -127,6 +127,15 @@ class Evento(models.Model):
     MassaSubtraida = models.DecimalField('Quantidade Subtraída (Kg)', blank=True, null=True,max_digits=10, decimal_places=3)
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE )
 
+
+    def diadasemana(self):
+        "Dia da semana"
+        import datetime
+        from django.template.defaultfilters import date as formatadata
+        from datetime import datetime
+        return formatadata(self.data, "l")
+        #return self.data.strftime("%A")
+  
     def __unicode__(self):
         return self.reds
 

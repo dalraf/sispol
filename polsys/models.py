@@ -31,8 +31,8 @@ class AlvoEvento(models.Model):
         managed = True
         db_table = 'ALVO_EVENTO'
         unique_together = (('Alvo', 'Evento'),)
-        verbose_name = 'Alvo Eventos'
-        verbose_name_plural = 'Alvos Eventos'
+        verbose_name = 'Alvo'
+        verbose_name_plural = 'Alvos'
 
 
 class Armamento(models.Model):
@@ -62,8 +62,8 @@ class ArmamentoEvento(models.Model):
         managed = True
         db_table = 'ARMAMENTO_EVENTO'
         unique_together = (('Armamento', 'Evento'),)
-        verbose_name = 'Armamento Evento'
-        verbose_name_plural = 'Armamentos Eventos'
+        verbose_name = 'Armamento'
+        verbose_name_plural = 'Armamentos'
 
 
 class Bairro(models.Model):
@@ -182,8 +182,8 @@ class MaterialEvento(models.Model):
         managed = True
         db_table = 'MATERIAL_EVENTO'
         unique_together = (('Material', 'Evento'),)
-        verbose_name = 'Material Evento'
-        verbose_name_plural = 'Materiais Eventos'
+        verbose_name = 'Material'
+        verbose_name_plural = 'Materiais'
 
 
 class ModusOperandi(models.Model):
@@ -223,8 +223,8 @@ class SupeitoCrimes(models.Model):
         managed = True
         db_table = 'SUPEITO_CRIMES'
         unique_together = (('Crime', 'Suspeito'),)
-        verbose_name = 'Suspeito Crime'
-        verbose_name_plural = 'Suspeitos Crimes'
+        verbose_name = 'Crime'
+        verbose_name_plural = 'Crimes'
 
 
 class Suspeito(models.Model):
@@ -256,7 +256,7 @@ class Suspeito(models.Model):
     image_tag.short_description = 'Imagem'
 
     def __unicode__(self):
-        return self.nome
+        return 'Nome: ' + self.nome + " / RG: " + self.rg
 
     class Meta:
         managed = True
@@ -275,8 +275,8 @@ class SuspeitoAlvo(models.Model):
         managed = True
         db_table = 'SUSPEITO_ALVO'
         unique_together = (('Evento', 'Suspeito'),)
-        verbose_name = 'Suspeito Alvo'
-        verbose_name_plural = 'Suspeitos Alvos'
+        verbose_name = 'Alvo'
+        verbose_name_plural = 'Alvos'
 
 
 class SuspeitoCidade(models.Model):
@@ -408,5 +408,5 @@ class VeiculoEvento(models.Model):
         managed = True
         db_table = 'VEICULO_EVENTO'
         unique_together = (('Veiculo', 'Evento'),)
-        verbose_name = 'Veículo em evento'
-        verbose_name_plural = 'Veículos em eventos'
+        verbose_name = 'Veículo'
+        verbose_name_plural = 'Veículos'

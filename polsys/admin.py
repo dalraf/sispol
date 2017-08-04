@@ -78,10 +78,22 @@ class VeiculoDetalhe(admin.ModelAdmin):
 
 admin.site.register(Suspeito,SuspeitoDetalhe)
 admin.site.register(Evento,EventoDetalhe)
-admin.site.register(Bairro)
+admin.site.register(Veiculo,VeiculoDetalhe)
+
+class BairroDetalhe(admin.ModelAdmin):
+    model = Bairro
+    raw_id_fields = ('Cidade',)
+
+admin.site.register(Bairro,BairroDetalhe)
+
+class ArmamentoDetalhe(admin.ModelAdmin):
+    model = Armamento
+    raw_id_fields = ('FabricanteArmamento','TipoArmamento')
+
+admin.site.register(Armamento,ArmamentoDetalhe)
+
 admin.site.register(Crime)
 admin.site.register(Cidade)
-admin.site.register(Armamento)
 admin.site.register(FabricanteArmamento)
 admin.site.register(TipoArmamento)
 admin.site.register(Faccao)
@@ -90,7 +102,6 @@ admin.site.register(ModusOperandi)
 admin.site.register(ObjetoAlvo)
 admin.site.register(TipoSituacaoPrisional)
 admin.site.register(UnidadePrisional)
-admin.site.register(Veiculo,VeiculoDetalhe)
 admin.site.register(TipoEnvolvimentoSuspeito)
 admin.site.register(TipoAlvo)
 admin.site.register(Alvo)

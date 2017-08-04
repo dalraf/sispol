@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #  pip install django wheel django-daterange-filter Pillow
+    #  pip install django wheel django-daterange-filter Pillow django-grappelli
+    'grappelli',
     'daterange_filter',
     'polsys.apps.PolsysConfig',
     'django.contrib.admin',

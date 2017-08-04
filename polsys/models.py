@@ -268,6 +268,7 @@ class SuspeitoAlvo(models.Model):
     Suspeito = models.ForeignKey(Suspeito, on_delete=models.CASCADE )
     data_inclusao = models.DateField('Data da Inclusão',blank=True, null=True)
 
+
     def __unicode__(self):
         return self.Evento.reds + ' / ' +  str(self.data_inclusao)
 

@@ -18,10 +18,12 @@ class VeiculoEventoInc(admin.TabularInline):
     extra = 0
 
 class SuspeitoAlvoInc(admin.TabularInline):
+    raw_id_fields = ('Evento',)
     model = SuspeitoAlvo
     extra = 0
 
 class SuspeitoCrimesInc(admin.TabularInline):
+    raw_id_fields = ('Crime',)
     model = SupeitoCrimes
     extra = 0
 

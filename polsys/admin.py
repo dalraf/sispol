@@ -89,7 +89,7 @@ admin.site.register(Veiculo,VeiculoDetalhe)
 admin.site.register(TipoEnvolvimentoSuspeito)
 admin.site.register(TipoAlvo)
 admin.site.register(Alvo)
-admin.site.register(SuspeitoAlvo)
+
 
 
 

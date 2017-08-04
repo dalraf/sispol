@@ -14,11 +14,12 @@ admin.site.site_title = 'Sistema Policial'
 admin.site.index_title = 'Sistema Policial'
 
 class VeiculoEventoInc(admin.TabularInline):
+    raw_id_fields = ('Veiculo',)
     model = VeiculoEvento
     extra = 0
 
 class SuspeitoAlvoInc(admin.TabularInline):
-    raw_id_fields = ('Evento',)
+    raw_id_fields = ('Suspeito','Evento',)
     model = SuspeitoAlvo
     extra = 0
 
@@ -28,25 +29,28 @@ class SuspeitoCrimesInc(admin.TabularInline):
     extra = 0
 
 class MaterialEventoInc(admin.TabularInline):
+    raw_id_fields = ('Material',)
     model = MaterialEvento
     extra = 0
 
 class ArmamentoEventoInc(admin.TabularInline):
+    raw_id_fields = ('Armamento',)
     model = ArmamentoEvento
     extra = 0
 
 class AlvoEventoInc(admin.TabularInline):
+    raw_id_fields = ('Alvo','ModusOperandi','ObjetoAlvo')
     model = AlvoEvento
     extra = 0
 
 class EventoDetalhe(admin.ModelAdmin):
-#    fields = ['data', 'horario', 'reds']
     model = Evento
     list_display = ('reds', 'data', 'horario' )
     list_filter = (('data', DateRangeFilter ),)
     search_fields = ('reds',)
     inlines = [SuspeitoAlvoInc,VeiculoEventoInc,MaterialEventoInc,ArmamentoEventoInc,AlvoEventoInc]
     readonly_fields = ('diadasemana',)
+    raw_id_fields = ('Crime','Bairro',)
     fieldsets = [
         (None,{'fields': ['data', 'horario', 'diadasemana', 'reds']}),
         ('Detalhes', {'fields': ['is_disparo_via_publica','is_disparo_bpm','is_disparo_dpc','is_troca_de_tiros','is_encapuzados','is_colete_balistico','is_miguelitos_fuga','ValorSubtraido', 'MassaSubtraida',]}),
@@ -54,7 +58,6 @@ class EventoDetalhe(admin.ModelAdmin):
     ]
 
 class SuspeitoDetalhe(admin.ModelAdmin):
-    #    fields = ['data', 'horario', 'reds']
     model = Suspeito
     list_display = ('nome', 'rg', 'data_nascimento' )
     list_filter = (('data_nascimento', DateRangeFilter ),)
@@ -62,12 +65,12 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc]
     search_fields = ('nome',)
     readonly_fields = ('image_tag',)
+    raw_id_fields = ('ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','UnidadePrisional','id_faccao')
     fieldsets = [
         ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto','foto','image_tag',]}),
         ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao','Comparsas']}),
     ]
 class VeiculoDetalhe(admin.ModelAdmin):
-    #    fields = ['data', 'horario', 'reds']
     model = Veiculo
     list_display = ('placa', 'nome','fabricante' )
     search_fields = ('placa','nome','fabricante',)

@@ -12,6 +12,10 @@ class Alvo(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
+
     class Meta:
         managed = True
         db_table = 'ALVO'
@@ -25,6 +29,10 @@ class AlvoEvento(models.Model):
     ObjetoAlvo = models.ForeignKey('ObjetoAlvo', verbose_name = 'Objeto Alvo', on_delete=models.CASCADE, blank=True, null=True)
     
     def __unicode__(self):
+        return self.Alvo.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
         return self.Alvo.nome
 
     class Meta:
@@ -46,6 +54,10 @@ class Armamento(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
+
     class Meta:
         managed = True
         db_table = 'ARMAMENTO'
@@ -56,6 +68,10 @@ class ArmamentoEvento(models.Model):
     Evento = models.ForeignKey('Evento', on_delete=models.CASCADE )
 
     def __unicode__(self):
+        return self.Armamento.nome + ' / ' + self.Evento.reds
+
+    @staticmethod
+    def autocomplete_search_fields():
         return self.Armamento.nome + ' / ' + self.Evento.reds
 
     class Meta:
@@ -72,6 +88,10 @@ class Bairro(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -90,6 +110,10 @@ class Cidade(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -124,6 +148,10 @@ class Evento(models.Model):
     def __unicode__(self):
         return self.reds
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'reds'
+
  
     class Meta:
         managed = True
@@ -137,6 +165,10 @@ class FabricanteArmamento(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
+
     class Meta:
         managed = True
         db_table = 'FABRICANTE_ARMAMENTO'
@@ -149,6 +181,10 @@ class Faccao(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -165,6 +201,10 @@ class Material(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
+
     class Meta:
         managed = True
         db_table = 'MATERIAL'
@@ -176,6 +216,10 @@ class MaterialEvento(models.Model):
     Evento = models.ForeignKey(Evento, on_delete=models.CASCADE )
 
     def __unicode__(self):
+        return self.Material.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
         return self.Material.nome
 
     class Meta:
@@ -191,6 +235,10 @@ class ModusOperandi(models.Model):
 
     def __unicode__(self):
         return self.nome
+    
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -205,6 +253,10 @@ class ObjetoAlvo(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
+
     class Meta:
         managed = True
         db_table = 'OBJETO_ALVO'
@@ -217,6 +269,10 @@ class SupeitoCrimes(models.Model):
     Suspeito = models.ForeignKey('Suspeito', on_delete=models.CASCADE )
 
     def __unicode__(self):
+        return self.Crime.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
         return self.Crime.nome
 
     class Meta:
@@ -260,6 +316,10 @@ class Suspeito(models.Model):
 
     image_tag.short_description = 'Imagem'
 
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
  
 
     def __unicode__(self):
@@ -279,6 +339,11 @@ class SuspeitoAlvo(models.Model):
     def __unicode__(self):
         return self.Evento.reds + ' / ' +  str(self.data_inclusao)
 
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return self.Evento.reds + ' / ' +  str(self.data_inclusao)
+
     class Meta:
         managed = True
         db_table = 'SUSPEITO_ALVO'
@@ -294,6 +359,10 @@ class SuspeitoCidade(models.Model):
     def __unicode__(self):
         return self.Cidade.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return self.Cidade.nome
+
     class Meta:
         managed = True
         db_table = 'SUSPEITO_CIDADE'
@@ -305,6 +374,10 @@ class TipoAlvo(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -319,6 +392,10 @@ class TipoArmamento(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
+
     class Meta:
         managed = True
         db_table = 'TIPO_ARMAMENTO'
@@ -331,6 +408,10 @@ class TipoEnvolvimentoSuspeito(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -350,6 +431,10 @@ class Crime(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
+
     class Meta:
         managed = True
         db_table = 'TIPO_CrimeL_CP'
@@ -361,6 +446,10 @@ class TipoSituacaoPrisional(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -374,6 +463,10 @@ class UnidadePrisional(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'nome'
 
     class Meta:
         managed = True
@@ -398,6 +491,10 @@ class Veiculo(models.Model):
     def __unicode__(self):
         return self.placa + ' / ' + self.nome + ' / ' + self.fabricante
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return self.placa + ' / ' + self.nome + ' / ' + self.fabricante
+
     class Meta:
         managed = True
         db_table = 'VEICULO'
@@ -410,6 +507,10 @@ class VeiculoEvento(models.Model):
     Evento = models.ForeignKey(Evento, verbose_name = 'Evento' , on_delete=models.CASCADE )
 
     def __unicode__(self):
+        return self.Veiculo.nome
+
+    @staticmethod
+    def autocomplete_search_fields():
         return self.Veiculo.nome
 
     class Meta:

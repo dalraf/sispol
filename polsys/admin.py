@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from daterange_filter.filter import DateRangeFilter
+
+from jet.filters import DateRangeFilter
+
 from django.apps import AppConfig
 
 # Register your models here.
@@ -14,32 +16,32 @@ admin.site.site_title = 'Sistema Policial'
 admin.site.index_title = 'Sistema Policial'
 
 class VeiculoEventoInc(admin.TabularInline):
-    raw_id_fields = ('Veiculo',)
+#    raw_id_fields = ('Veiculo',)
     model = VeiculoEvento
     extra = 0
 
 class SuspeitoAlvoInc(admin.TabularInline):
-    raw_id_fields = ('Suspeito','Evento',)
+#    raw_id_fields = ('Suspeito','Evento',)
     model = SuspeitoAlvo
     extra = 0
 
 class SuspeitoCrimesInc(admin.TabularInline):
-    raw_id_fields = ('Crime',)
+#    raw_id_fields = ('Crime',)
     model = SupeitoCrimes
     extra = 0
 
 class MaterialEventoInc(admin.TabularInline):
-    raw_id_fields = ('Material',)
+ #   raw_id_fields = ('Material',)
     model = MaterialEvento
     extra = 0
 
 class ArmamentoEventoInc(admin.TabularInline):
-    raw_id_fields = ('Armamento',)
+#    raw_id_fields = ('Armamento',)
     model = ArmamentoEvento
     extra = 0
 
 class AlvoEventoInc(admin.TabularInline):
-    raw_id_fields = ('Alvo','ModusOperandi','ObjetoAlvo')
+#    raw_id_fields = ('Alvo','ModusOperandi','ObjetoAlvo')
     model = AlvoEvento
     extra = 0
 
@@ -50,11 +52,11 @@ class EventoDetalhe(admin.ModelAdmin):
     search_fields = ('reds',)
     inlines = [SuspeitoAlvoInc,VeiculoEventoInc,MaterialEventoInc,ArmamentoEventoInc,AlvoEventoInc]
     readonly_fields = ('diadasemana',)
-    raw_id_fields = ('Crime','Bairro',)
+ #   raw_id_fields = ('Crime','Bairro',)
     fieldsets = [
-        (None,{'fields': ['data', 'horario', 'diadasemana', 'reds']}),
+        ('Dados',{'fields': ['data', 'horario', 'diadasemana', 'reds']}),
         ('Detalhes', {'fields': ['is_disparo_via_publica','is_disparo_bpm','is_disparo_dpc','is_troca_de_tiros','is_encapuzados','is_colete_balistico','is_miguelitos_fuga','ValorSubtraido', 'MassaSubtraida',]}),
-        (None,{'fields': ['Crime', 'Bairro' ]}),
+        ('Adicionais',{'fields': ['Crime', 'Bairro' ]}),
     ]
 
 class SuspeitoDetalhe(admin.ModelAdmin):
@@ -65,7 +67,7 @@ class SuspeitoDetalhe(admin.ModelAdmin):
     inlines = [SuspeitoAlvoInc,SuspeitoCrimesInc]
     search_fields = ('nome',)
     readonly_fields = ('image_tag',)
-    raw_id_fields = ('ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','UnidadePrisional','id_faccao')
+#    raw_id_fields = ('ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','UnidadePrisional','id_faccao')
     fieldsets = [
         ('Dados Pessoais',{'fields': ['nome', 'alcunha', 'rg', 'cpf' ,'naturalidade', 'uf', 'data_nascimento','nome_da_mae','regiao','is_foto','foto','image_tag',]}),
         ('Dados Policiais', {'fields': ['fonte','ModusOperandi','TipoEnvolvimentoSuspeito','TipoSituacaoPrisional','data_ultima_prisao','UnidadePrisional','is_monitoramento_sige','is_alta_periculosidade', 'is_confronto_policia', 'id_faccao','Comparsas']}),
@@ -82,13 +84,13 @@ admin.site.register(Veiculo,VeiculoDetalhe)
 
 class BairroDetalhe(admin.ModelAdmin):
     model = Bairro
-    raw_id_fields = ('Cidade',)
+#    raw_id_fields = ('Cidade',)
 
 admin.site.register(Bairro,BairroDetalhe)
 
 class ArmamentoDetalhe(admin.ModelAdmin):
     model = Armamento
-    raw_id_fields = ('FabricanteArmamento','TipoArmamento')
+#    raw_id_fields = ('FabricanteArmamento','TipoArmamento')
 
 admin.site.register(Armamento,ArmamentoDetalhe)
 

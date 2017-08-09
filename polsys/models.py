@@ -136,6 +136,7 @@ class Evento(models.Model):
     MassaSubtraida = models.DecimalField('Quantidade Subtraída (Kg)', blank=True, null=True,max_digits=10, decimal_places=3)
     Bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE , null=True, blank=True,)
     Fronteira = models.CharField(max_length=19, blank=True, null=True)
+    informacoescomplementares = models.TextField('Informações Complementares',blank=True, null=True)
 
 
     def diadasemana(self):
